@@ -22,3 +22,23 @@
 
 
 <!-- nx configuration end-->
+
+# Project Spec & Execution
+
+This project has structured documentation under `docs/`. Always consult the relevant spec before making changes.
+
+## Key spec files
+
+- @docs/spec/architecture.md — monorepo structure, patterns, ADRs
+- @docs/spec/instructions.md — code quality rules, registry contract, validation gates, git workflow
+- @docs/spec/contributing.md — how to add a sub-app (base path, copy target, registration, tests)
+- @docs/spec/stack.md — tech stack and Nx command reference
+
+## Execution
+
+Use these skills to execute planned work:
+
+- `/execute-task <id>` — execute a single task (e.g. `/execute-task P1-001`)
+- `/execute-phase <n>` — execute all tasks in a phase in order (e.g. `/execute-phase 1`)
+
+Both skills load the relevant plan file and spec docs automatically and follow the documented procedures in `docs/spec/task-execution.md` and `docs/spec/phase-execution.md`.

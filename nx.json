@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "defaultBase": "master",
+  "defaultBase": "main",
   "analytics": false,
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
@@ -65,6 +65,11 @@
       "application": {
         "style": "css",
         "linter": "eslint"
+      }
+    },
+    "@nx/react": {
+      "library": {
+        "unitTestRunner": "none"
       }
     }
   }

@@ -7,6 +7,12 @@ const { composePlugins, withNx } = require('@nx/next');
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
+  // Compile workspace packages from source in dev
+  transpilePackages: [
+    '@rp-vibe-ideation/ideation-registry',
+    '@rp-vibe-ideation/example-app',
+    '@rp-vibe-ideation/dashboard-app',
+  ],
   // Use this to set Nx-specific options
   // See: https://nx.dev/recipes/next/next-config-setup
   nx: {},

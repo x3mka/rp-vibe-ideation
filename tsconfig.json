@@ -5,6 +5,15 @@
   "references": [
     {
       "path": "./apps/web"
+    },
+    {
+      "path": "./packages/ideation-registry"
+    },
+    {
+      "path": "./ideations/example-app"
+    },
+    {
+      "path": "./ideations/dashboard-app"
     }
   ]
 }
