@@ -12,13 +12,6 @@ export interface IdeationApp {
 
 export const registry: IdeationApp[] = [
   {
-    id: 'google',
-    name: 'Google',
-    description: 'External URL smoke test',
-    group: 'Examples',
-    url: 'https://google.com',
-  },
-  {
     id: 'react-app',
     name: 'React App',
     description: 'Blank React + Vite example',

@@ -2,9 +2,9 @@ import { getApp, groupedRegistry, registry, IdeationApp } from './ideation-regis
 
 describe('getApp', () => {
   it('returns the correct entry for a known id', () => {
-    const app = getApp('google');
+    const app = getApp('react-app');
     expect(app).toBeDefined();
-    expect(app?.id).toBe('google');
+    expect(app?.id).toBe('react-app');
   });
 
   it('returns undefined for an unknown id', () => {

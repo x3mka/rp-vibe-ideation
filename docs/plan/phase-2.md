@@ -158,3 +158,20 @@ Verify both sub-apps load correctly in production mode and dev mode.
 - No TypeScript errors (`pnpm nx run-many -t typecheck`)
 - No lint errors (`pnpm nx lint web`)
 - All tests pass (`pnpm nx run-many -t test`)
+
+---
+
+### P2-005 — Remove Google external URL smoke-test entry
+
+**Status:** `done`
+
+Remove the `google` entry from the registry — it was added as a smoke test in Phase 1 and is no longer needed now that real sub-apps exist.
+
+**Files:**
+- `packages/ideation-registry/src/lib/ideation-registry.ts`
+- `packages/ideation-registry/src/lib/ideation-registry.spec.ts` — update any test that references the google entry
+
+**Definition of done:**
+- `google` entry is removed from the registry array
+- All registry tests pass (`pnpm nx test ideation-registry`)
+- No lint or typecheck errors
