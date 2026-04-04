@@ -1,27 +1,29 @@
 export interface IdeationApp {
   id: string;
-  label: string;
+  name: string;
   description: string;
-  /** Backend type for display/filtering */
-  type: 'ui-only' | 'mock-api' | 'real-api';
-  /** Group name shown in the app-switcher dropdown */
-  group?: string;
+  /** Category for grouping in the app-switcher dropdown */
+  group: string;
+  /** Shell-hosted path (e.g. /apps/<id>) or absolute URL for external apps */
+  url: string;
+  /** Optional dev server URL for HMR in development */
+  devUrl?: string;
 }
 
 export const registry: IdeationApp[] = [
   {
     id: 'example-app',
-    label: 'Example App',
+    name: 'Example App',
     description: 'A starter sub-app demonstrating the ideation pattern',
-    type: 'ui-only',
     group: 'Sample Apps',
+    url: '/apps/example-app',
   },
   {
     id: 'dashboard-app',
-    label: 'Dashboard App',
+    name: 'Dashboard App',
     description: 'Multi-page app with sidebar navigation across Analytics and Settings',
-    type: 'ui-only',
     group: 'Sample Apps',
+    url: '/apps/dashboard-app',
   },
 ];
 

@@ -10,7 +10,7 @@
 
 ### P1-001 — Update registry interface
 
-**Status:** `new`
+**Status:** `done`
 
 Update `packages/ideation-registry/src/lib/ideation-registry.ts` to match the spec:
 - Rename `label` → `name`

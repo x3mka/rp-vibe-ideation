@@ -46,7 +46,7 @@ export function ShellHeader() {
         {activeApp && (
           <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
             <span className="text-base font-semibold leading-tight text-white">
-              {activeApp.label}
+              {activeApp.name}
             </span>
             <span className="text-xs leading-tight text-zinc-400">
               {activeApp.description}
@@ -66,7 +66,7 @@ export function ShellHeader() {
               <optgroup key={groupName} label={groupName}>
                 {apps.map((app) => (
                   <option key={app.id} value={app.id}>
-                    {app.label}
+                    {app.name}
                   </option>
                 ))}
               </optgroup>
