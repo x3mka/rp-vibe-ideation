@@ -3,7 +3,7 @@
   "targets": {
     "copy": {
       "dependsOn": ["build"],
-      "command": "cp -r ideations/react-app/dist/. apps/web/public/apps/react-app/",
+      "command": "node -e \"require('fs').cpSync('ideations/react-app/dist', 'apps/web/public/apps/react-app', {recursive:true,force:true})\"",
       "options": { "cwd": "{workspaceRoot}" }
     }
   }

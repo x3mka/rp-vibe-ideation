@@ -80,7 +80,7 @@
     },
     "copy": {
       "dependsOn": ["build"],
-      "command": "cp -r dist/ideations/angular-app/browser/. apps/web/public/apps/angular-app/",
+      "command": "node -e \"require('fs').cpSync('dist/ideations/angular-app/browser', 'apps/web/public/apps/angular-app', {recursive:true,force:true})\"",
       "options": { "cwd": "{workspaceRoot}" }
     },
     "typecheck": {
