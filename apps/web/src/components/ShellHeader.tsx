@@ -68,6 +68,7 @@ export function ShellHeader(): React.JSX.Element {
               type="button"
               onClick={handleOpenInNewTab}
               aria-label="Open in new tab"
+              title="Open in new tab"
               className="rounded-md p-1.5 text-zinc-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
             >
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
