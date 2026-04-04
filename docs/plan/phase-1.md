@@ -30,7 +30,7 @@ Update `packages/ideation-registry/src/lib/ideation-registry.ts` to match the sp
 
 ### P1-002 — Implement iframe loader route
 
-**Status:** `new`
+**Status:** `done`
 
 Replace the current React dynamic-import route with a simple iframe loader.
 
