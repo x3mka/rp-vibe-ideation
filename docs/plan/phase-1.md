@@ -74,7 +74,7 @@ Align `ShellHeader.tsx` with the updated registry interface and add the "Open in
 
 ### P1-004 — Clean up next.config.js
 
-**Status:** `new`
+**Status:** `done`
 
 Remove sub-app packages from `transpilePackages`. After the iframe pivot, the shell no longer imports sub-apps as TypeScript modules.
 

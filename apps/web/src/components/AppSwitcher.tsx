@@ -30,7 +30,7 @@ export function AppSwitcher() {
         <optgroup key={groupName} label={groupName}>
           {apps.map((app) => (
             <option key={app.id} value={app.id}>
-              {app.label}
+              {app.name}
             </option>
           ))}
         </optgroup>

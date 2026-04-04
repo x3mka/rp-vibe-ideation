@@ -1,1 +1,1 @@
-export * from './lib/ideation-registry.js';
+export * from './lib/ideation-registry';
