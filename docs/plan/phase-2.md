@@ -12,7 +12,7 @@
 
 ### P2-001 — Create blank React sub-app
 
-**Status:** `new`
+**Status:** `done`
 
 Scaffold a minimal React + Vite app under `ideations/react-app/` using the Nx React plugin.
 

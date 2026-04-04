@@ -1,0 +1,10 @@
+{
+  "name": "@rp-vibe-ideation/react-app",
+  "targets": {
+    "copy": {
+      "dependsOn": ["build"],
+      "command": "cp -r ideations/react-app/dist/. apps/web/public/apps/react-app/",
+      "options": { "cwd": "{workspaceRoot}" }
+    }
+  }
+}

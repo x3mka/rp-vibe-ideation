@@ -14,6 +14,9 @@
     },
     {
       "path": "./ideations/dashboard-app"
+    },
+    {
+      "path": "./ideations/react-app"
     }
   ]
 }

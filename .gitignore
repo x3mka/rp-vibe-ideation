@@ -53,3 +53,5 @@ out
 apps/web/public/apps/
 
 test-output
+
+vite.config.*.timestamp*

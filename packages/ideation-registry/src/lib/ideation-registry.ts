@@ -18,6 +18,14 @@ export const registry: IdeationApp[] = [
     group: 'Examples',
     url: 'https://google.com',
   },
+  {
+    id: 'react-app',
+    name: 'React App',
+    description: 'Blank React + Vite example',
+    group: 'Examples',
+    url: '/apps/react-app',
+    devUrl: 'http://localhost:4201',
+  },
 ];
 
 /** Registry entries grouped by their `group` field (ungrouped → "Other"). */
