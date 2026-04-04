@@ -41,9 +41,10 @@ describe('ShellHeader', () => {
     expect(screen.getByRole('button', { name: /open in new tab/i })).toBeTruthy();
   });
 
-  it('renders app groups in the switcher', () => {
+  it('renders the app switcher trigger', () => {
     usePathname.mockReturnValue('/');
     render(<ShellHeader />);
-    expect(screen.getByText('Test App')).toBeTruthy();
+    // Combobox trigger is always visible; shows placeholder when no app is active
+    expect(screen.getByText('— Select an app —')).toBeTruthy();
   });
 });

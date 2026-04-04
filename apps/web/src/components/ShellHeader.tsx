@@ -2,8 +2,9 @@
 
 import { useRouter, usePathname } from 'next/navigation';
 import { ExternalLink, Sparkles } from 'lucide-react';
-import { registry, groupedRegistry } from '@rp-vibe-ideation/ideation-registry';
+import { registry } from '@rp-vibe-ideation/ideation-registry';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
+import { AppSwitcher } from './AppSwitcher';
 
 /**
  * Icon choices for "Vibe Ideation" brand mark (swap as desired):
@@ -23,12 +24,9 @@ export function ShellHeader(): React.JSX.Element {
     : undefined;
 
   const activeApp = registry.find((a) => a.id === activeId);
-  const groups = groupedRegistry();
 
-  function handleChange(e: React.ChangeEvent<HTMLSelectElement>): void {
-    const id = e.target.value;
-    if (id) router.push(`/ideation/${id}`);
-    else router.push('/');
+  function handleSelect(id: string): void {
+    router.push(`/ideation/${id}`);
   }
 
   function handleOpenInNewTab(): void {
@@ -77,22 +75,7 @@ export function ShellHeader(): React.JSX.Element {
               <TooltipContent>Open in new tab</TooltipContent>
             </Tooltip>
           )}
-          <select
-            value={activeId ?? ''}
-            onChange={handleChange}
-            className="rounded-md border border-zinc-700 bg-zinc-800 px-3 py-1.5 text-sm text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
-          >
-            <option value="">— Select an app —</option>
-            {Object.entries(groups).map(([groupName, apps]) => (
-              <optgroup key={groupName} label={groupName}>
-                {apps.map((app) => (
-                  <option key={app.id} value={app.id}>
-                    {app.name}
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
+          <AppSwitcher activeId={activeId} onSelect={handleSelect} />
         </div>
 
       </div>
