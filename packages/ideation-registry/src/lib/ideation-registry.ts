@@ -12,18 +12,11 @@ export interface IdeationApp {
 
 export const registry: IdeationApp[] = [
   {
-    id: 'example-app',
-    name: 'Example App',
-    description: 'A starter sub-app demonstrating the ideation pattern',
-    group: 'Sample Apps',
-    url: '/apps/example-app',
-  },
-  {
-    id: 'dashboard-app',
-    name: 'Dashboard App',
-    description: 'Multi-page app with sidebar navigation across Analytics and Settings',
-    group: 'Sample Apps',
-    url: '/apps/dashboard-app',
+    id: 'google',
+    name: 'Google',
+    description: 'External URL smoke test',
+    group: 'Examples',
+    url: 'https://google.com',
   },
 ];
 

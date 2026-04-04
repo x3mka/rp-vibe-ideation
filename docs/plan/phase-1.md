@@ -92,7 +92,7 @@ Remove sub-app packages from `transpilePackages`. After the iframe pivot, the sh
 
 ### P1-005 — Register a static external app
 
-**Status:** `new`
+**Status:** `done`
 
 Replace existing registry entries with a single external URL entry to validate the iframe loading pattern without needing a local dev server. External apps use an absolute URL directly in `url` — no base path or copy step required.
 
