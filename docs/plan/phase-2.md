@@ -107,7 +107,7 @@ Adjust the generated app:
 
 ### P2-003 — Wire shell build dependencies
 
-**Status:** `new`
+**Status:** `done`
 
 Configure the shell's `build` target to depend on both sub-app `copy` targets so that `pnpm nx build web` orchestrates the entire build in the correct order.
 

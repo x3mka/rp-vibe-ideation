@@ -1,0 +1,8 @@
+{
+  "name": "@rp-vibe-ideation/web",
+  "targets": {
+    "build": {
+      "dependsOn": ["react-app:copy", "angular-app:copy"]
+    }
+  }
+}
