@@ -13,9 +13,12 @@ export default async function IdeationPage({ params }: Props): Promise<React.JSX
     notFound();
   }
 
+  const isDev = process.env.NODE_ENV === 'development';
+  const effectiveUrl = isDev && app.devUrl ? app.devUrl : app.url;
+
   return (
     <iframe
-      src={app.url}
+      src={effectiveUrl}
       style={{ width: '100%', height: 'calc(100vh - 3.5rem)', border: 'none' }}
       title={app.name}
     />

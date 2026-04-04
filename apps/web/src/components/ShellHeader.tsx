@@ -31,7 +31,10 @@ export function ShellHeader(): React.JSX.Element {
   }
 
   function handleOpenInNewTab(): void {
-    if (activeApp) window.open(activeApp.url, '_blank');
+    if (!activeApp) return;
+    const isDev = process.env.NODE_ENV === 'development';
+    const effectiveUrl = isDev && activeApp.devUrl ? activeApp.devUrl : activeApp.url;
+    window.open(effectiveUrl, '_blank');
   }
 
   return (

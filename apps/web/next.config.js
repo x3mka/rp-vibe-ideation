@@ -9,6 +9,11 @@ const { composePlugins, withNx } = require('@nx/next');
 const nextConfig = {
   // Compile workspace packages from source in dev
   transpilePackages: ['@rp-vibe-ideation/ideation-registry'],
+  // Rewrite /apps/:id → /apps/:id/index.html so the sub-app entry point is served
+  // without requiring the trailing /index.html in the registry url field.
+  async rewrites() {
+    return [{ source: '/apps/:id', destination: '/apps/:id/index.html' }];
+  },
   // Use this to set Nx-specific options
   // See: https://nx.dev/recipes/next/next-config-setup
   nx: {},
