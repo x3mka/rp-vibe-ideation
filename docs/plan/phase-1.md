@@ -111,7 +111,7 @@ Replace existing registry entries with a single external URL entry to validate t
 
 ### P1-006 — End-to-end smoke test
 
-**Status:** `new`
+**Status:** `done`
 
 Verify the full Phase 1 shell flow works end-to-end.
 
