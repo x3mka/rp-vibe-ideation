@@ -3,6 +3,9 @@
   "targets": {
     "build": {
       "dependsOn": ["react-app:copy", "angular-app:copy"]
+    },
+    "dev": {
+      "dependsOn": ["react-app:copy", "angular-app:copy"]
     }
   }
 }

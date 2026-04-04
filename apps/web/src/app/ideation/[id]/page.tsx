@@ -13,8 +13,8 @@ export default async function IdeationPage({ params }: Props): Promise<React.JSX
     notFound();
   }
 
-  const isDev = process.env.NODE_ENV === 'development';
-  const effectiveUrl = isDev && app.devUrl ? app.devUrl : app.url;
+  const useDevUrls = process.env.NEXT_PUBLIC_USE_DEV_URLS === 'true';
+  const effectiveUrl = useDevUrls && app.devUrl ? app.devUrl : app.url;
 
   return (
     <iframe
