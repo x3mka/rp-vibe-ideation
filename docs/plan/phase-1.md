@@ -53,7 +53,7 @@ Replace the current React dynamic-import route with a simple iframe loader.
 
 ### P1-003 — Update ShellHeader
 
-**Status:** `new`
+**Status:** `done`
 
 Align `ShellHeader.tsx` with the updated registry interface and add the "Open in new tab" button.
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, usePathname } from 'next/navigation';
-import { Sparkles } from 'lucide-react';
+import { ExternalLink, Sparkles } from 'lucide-react';
 import { registry, groupedRegistry } from '@rp-vibe-ideation/ideation-registry';
 
 /**
@@ -13,7 +13,7 @@ import { registry, groupedRegistry } from '@rp-vibe-ideation/ideation-registry';
  *   Flame     — fire / passion
  */
 
-export function ShellHeader() {
+export function ShellHeader(): React.JSX.Element {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -24,10 +24,14 @@ export function ShellHeader() {
   const activeApp = registry.find((a) => a.id === activeId);
   const groups = groupedRegistry();
 
-  function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
+  function handleChange(e: React.ChangeEvent<HTMLSelectElement>): void {
     const id = e.target.value;
     if (id) router.push(`/ideation/${id}`);
     else router.push('/');
+  }
+
+  function handleOpenInNewTab(): void {
+    if (activeApp) window.open(activeApp.url, '_blank');
   }
 
   return (
@@ -54,8 +58,18 @@ export function ShellHeader() {
           </div>
         )}
 
-        {/* Right — grouped app switcher */}
-        <div className="ml-auto">
+        {/* Right — open-in-new-tab button + grouped app switcher */}
+        <div className="ml-auto flex items-center gap-2">
+          {activeApp && (
+            <button
+              type="button"
+              onClick={handleOpenInNewTab}
+              aria-label="Open in new tab"
+              className="rounded-md p-1.5 text-zinc-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
+            >
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+            </button>
+          )}
           <select
             value={activeId ?? ''}
             onChange={handleChange}
