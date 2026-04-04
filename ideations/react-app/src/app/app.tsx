@@ -1,4 +1,6 @@
-export function App(): JSX.Element {
+import type { ReactElement } from 'react';
+
+export function App(): ReactElement {
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '2rem', textAlign: 'center' }}>
       <h1>React App</h1>

@@ -134,7 +134,7 @@ Add to `apps/web/project.json` (or `nx.json` targetDefaults if preferred):
 
 ### P2-004 — End-to-end smoke test
 
-**Status:** `new`
+**Status:** `done`
 
 Verify both sub-apps load correctly in production mode and dev mode.
 

@@ -82,6 +82,10 @@
       "dependsOn": ["build"],
       "command": "cp -r dist/ideations/angular-app/browser/. apps/web/public/apps/angular-app/",
       "options": { "cwd": "{workspaceRoot}" }
+    },
+    "typecheck": {
+      "command": "tsc --noEmit -p tsconfig.app.json",
+      "options": { "cwd": "{projectRoot}" }
     }
   }
 }
