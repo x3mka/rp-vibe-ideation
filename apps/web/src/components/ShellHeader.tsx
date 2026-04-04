@@ -3,6 +3,7 @@
 import { useRouter, usePathname } from 'next/navigation';
 import { ExternalLink, Sparkles } from 'lucide-react';
 import { registry, groupedRegistry } from '@rp-vibe-ideation/ideation-registry';
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 
 /**
  * Icon choices for "Vibe Ideation" brand mark (swap as desired):
@@ -64,15 +65,17 @@ export function ShellHeader(): React.JSX.Element {
         {/* Right — open-in-new-tab button + grouped app switcher */}
         <div className="ml-auto flex items-center gap-2">
           {activeApp && (
-            <button
-              type="button"
-              onClick={handleOpenInNewTab}
-              aria-label="Open in new tab"
-              title="Open in new tab"
-              className="rounded-md p-1.5 text-zinc-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
-            >
-              <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            </button>
+            <Tooltip>
+              <TooltipTrigger
+                type="button"
+                onClick={handleOpenInNewTab}
+                aria-label="Open in new tab"
+                className="rounded-md p-1.5 text-zinc-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
+              >
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </TooltipTrigger>
+              <TooltipContent>Open in new tab</TooltipContent>
+            </Tooltip>
           )}
           <select
             value={activeId ?? ''}

@@ -1,5 +1,6 @@
 import './global.css';
 import { ShellHeader } from '../components/ShellHeader';
+import { TooltipProvider } from '../components/ui/tooltip';
 
 export const metadata = {
   title: 'RP Vibe Ideation',
@@ -14,8 +15,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-background text-foreground">
-        <ShellHeader />
-        <main>{children}</main>
+        <TooltipProvider>
+          <ShellHeader />
+          <main>{children}</main>
+        </TooltipProvider>
       </body>
     </html>
   );
