@@ -1,0 +1,87 @@
+{
+  "name": "angular-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "ideations/angular-app/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/ideations/angular-app",
+        "baseHref": "/apps/angular-app/",
+        "browser": "ideations/angular-app/src/main.ts",
+        "tsConfig": "ideations/angular-app/tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "ideations/angular-app/public"
+          }
+        ],
+        "styles": ["ideations/angular-app/src/styles.css"]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "continuous": true,
+      "executor": "@angular/build:dev-server",
+      "options": {
+        "port": 4202
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-app:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-app:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {}
+    },
+    "serve-static": {
+      "continuous": true,
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "angular-app:build",
+        "staticFilePath": "dist/ideations/angular-app/browser",
+        "spa": true
+      }
+    },
+    "copy": {
+      "dependsOn": ["build"],
+      "command": "cp -r dist/ideations/angular-app/browser/. apps/web/public/apps/angular-app/",
+      "options": { "cwd": "{workspaceRoot}" }
+    }
+  }
+}

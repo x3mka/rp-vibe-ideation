@@ -26,6 +26,14 @@ export const registry: IdeationApp[] = [
     url: '/apps/react-app',
     devUrl: 'http://localhost:4201',
   },
+  {
+    id: 'angular-app',
+    name: 'Angular App',
+    description: 'Blank Angular example',
+    group: 'Examples',
+    url: '/apps/angular-app',
+    devUrl: 'http://localhost:4202',
+  },
 ];
 
 /** Registry entries grouped by their `group` field (ungrouped → "Other"). */

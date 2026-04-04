@@ -60,7 +60,7 @@ Adjust the generated app:
 
 ### P2-002 — Create blank Angular sub-app
 
-**Status:** `new`
+**Status:** `done`
 
 Scaffold a minimal Angular app under `ideations/angular-app/` using the Nx Angular plugin.
 
