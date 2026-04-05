@@ -122,7 +122,7 @@ function TeamSwitcher({ teams }: { teams: Team[] }): ReactElement {
 
 interface NavItem {
   title: string;
-  url: string;
+  url?: string;
   icon?: LucideIcon;
   isActive?: boolean;
   items?: { title: string; url: string }[];
@@ -152,10 +152,8 @@ function NavMain({ items }: { items: NavItem[] }): ReactElement {
                 <SidebarMenuSub>
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
-                          <span>{subItem.title}</span>
-                        </a>
+                      <SidebarMenuSubButton>
+                        <span>{subItem.title}</span>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   ))}
@@ -173,7 +171,7 @@ function NavMain({ items }: { items: NavItem[] }): ReactElement {
 
 interface Project {
   name: string;
-  url: string;
+  url?: string;
   icon: LucideIcon;
 }
 
@@ -186,11 +184,9 @@ function NavProjects({ projects }: { projects: Project[] }): ReactElement {
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
-              <a href={item.url}>
-                <item.icon />
-                <span>{item.name}</span>
-              </a>
+            <SidebarMenuButton>
+              <item.icon />
+              <span>{item.name}</span>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
