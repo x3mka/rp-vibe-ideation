@@ -1,6 +1,9 @@
 {
   "name": "@rp-vibe-ideation/react-app",
   "targets": {
+    "build": {
+      "inputs": ["production", "^production", { "externalDependencies": ["vite"] }, { "env": "BASE_PATH_PREFIX" }]
+    },
     "copy": {
       "dependsOn": ["build"],
       "command": "node -e \"require('fs').cpSync('ideations/react-app/dist', 'apps/web/public/apps/react-app', {recursive:true,force:true})\"",

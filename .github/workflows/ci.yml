@@ -69,6 +69,15 @@ jobs:
         env:
           GITHUB_PAGES: true
           NEXT_PUBLIC_BASE_PATH: /rp-vibe-ideation
+          # Vite sub-apps read this to prefix their asset base path
+          BASE_PATH_PREFIX: /rp-vibe-ideation
+
+      # Angular's baseHref is baked into angular.json and cannot be set via env.
+      # Patch the exported index.html directly in the out/ artifact.
+      - name: Patch Angular app base href for GitHub Pages
+        run: |
+          sed -i 's|<base href="/apps/angular-app/">|<base href="/rp-vibe-ideation/apps/angular-app/">|g' \
+            apps/web/out/apps/angular-app/index.html
 
       - uses: actions/configure-pages@v4
 

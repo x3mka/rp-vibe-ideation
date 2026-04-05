@@ -32,7 +32,10 @@ export function ShellHeader(): React.JSX.Element {
   function handleOpenInNewTab(): void {
     if (!activeApp) return;
     const useDevUrls = process.env.NEXT_PUBLIC_USE_DEV_URLS === 'true';
-    const effectiveUrl = useDevUrls && activeApp.devUrl ? activeApp.devUrl : activeApp.url;
+    const rawUrl = useDevUrls && activeApp.devUrl ? activeApp.devUrl : activeApp.url;
+    // Prepend basePath for shell-hosted paths; leave absolute devUrls untouched.
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+    const effectiveUrl = rawUrl.startsWith('/') ? `${basePath}${rawUrl}` : rawUrl;
     window.open(effectiveUrl, '_blank');
   }
 

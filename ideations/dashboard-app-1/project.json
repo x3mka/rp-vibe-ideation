@@ -1,6 +1,9 @@
 {
   "name": "@rp-vibe-ideation/dashboard-app-1",
   "targets": {
+    "build": {
+      "inputs": ["production", "^production", { "externalDependencies": ["vite"] }, { "env": "BASE_PATH_PREFIX" }]
+    },
     "copy": {
       "dependsOn": ["build"],
       "command": "node -e \"require('fs').cpSync('ideations/dashboard-app-1/dist', 'apps/web/public/apps/dashboard-app-1', {recursive:true,force:true})\"",
