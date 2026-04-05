@@ -27,6 +27,14 @@ export const registry: IdeationApp[] = [
     url: '/apps/angular-app',
     devUrl: 'http://localhost:4202',
   },
+  {
+    id: 'dashboard-app-1',
+    name: 'Dashboard App 1',
+    description: 'shadcn sidebar-07 collapsible sidebar dashboard',
+    group: 'Dashboards',
+    url: '/apps/dashboard-app-1',
+    devUrl: 'http://localhost:4203',
+  },
 ];
 
 /** Registry entries grouped by their `group` field (ungrouped → "Other"). */
