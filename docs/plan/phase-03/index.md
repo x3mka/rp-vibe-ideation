@@ -1,6 +1,6 @@
 # Phase 03 — Sub-Apps
 
-**Status:** `in-progress`
+**Status:** `done`
 
 **Prerequisite:** Phase 02 complete.
 
@@ -26,9 +26,9 @@ A shadcn/ui `sidebar-07` block implementation — collapsible sidebar with team 
 
 | Task | Title | Status |
 |---|---|---|
-| [p3-001](p3-001.md) | Scaffold dashboard-app-1 React+Vite app | `pending` |
-| [p3-002](p3-002.md) | Configure Vite and set up Tailwind v4 + shadcn deps | `pending` |
-| [p3-003](p3-003.md) | Add shadcn UI components | `pending` |
-| [p3-004](p3-004.md) | Implement sidebar-07 layout | `pending` |
-| [p3-005](p3-005.md) | Wire build infrastructure and register app | `pending` |
-| [p3-006](p3-006.md) | Add smoke test and verify end-to-end | `pending` |
+| [p3-001](p3-001.md) | Scaffold dashboard-app-1 React+Vite app | `done` |
+| [p3-002](p3-002.md) | Configure Vite and set up Tailwind v4 + shadcn deps | `done` |
+| [p3-003](p3-003.md) | Add shadcn UI components | `done` |
+| [p3-004](p3-004.md) | Implement sidebar-07 layout | `done` |
+| [p3-005](p3-005.md) | Wire build infrastructure and register app | `done` |
+| [p3-006](p3-006.md) | Add smoke test and verify end-to-end | `done` |
