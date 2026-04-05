@@ -1,6 +1,6 @@
 ---
 name: execute-task
-description: Execute a specific task from the project plan. Invoke as /execute-task <task-id> (e.g. /execute-task P1-001).
+description: Execute a specific task from the project plan. Invoke as /execute-task <task-id> (e.g. /execute-task p1-001).
 argument-hint: <task-id>
 disable-model-invocation: true
 ---
@@ -14,12 +14,12 @@ Read these files before doing anything else:
 - `docs/spec/instructions.md` — code quality rules and validation gates
 - `docs/spec/architecture.md` — patterns to follow
 
-Determine the phase file from the task ID prefix:
-- `P1-xxx` → `docs/plan/phase-1.md`
-- `P2-xxx` → `docs/plan/phase-2.md`
-- `P3-xxx` → `docs/plan/phase-3.md`
+Determine the task file from the task ID:
+- `p1-xxx` → `docs/plan/phase-01/p1-xxx.md`
+- `p2-xxx` → `docs/plan/phase-02/p2-xxx.md`
+- `p3-xxx` → `docs/plan/phase-03/p3-xxx.md`
 
-Read the phase file and locate task **$ARGUMENTS**. Read its description, affected files, and every Definition of Done criterion in full.
+Read the task file and locate task **$ARGUMENTS**. Read its description, affected files, and every Definition of Done criterion in full.
 
 ## Step 2 — Read affected files
 
@@ -46,7 +46,7 @@ Verify every DoD criterion explicitly. Do not mark done if any criterion is uncl
 
 ## Step 5 — Complete
 
-- Update the task's `**Status:**` from `new` to `done` in the phase plan file
+- Update the task's `**Status:**` from `new` to `done` in the task file
 - Commit with the format:
   ```
   <type>(<scope>): <description>

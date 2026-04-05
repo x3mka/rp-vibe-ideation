@@ -240,12 +240,6 @@ importers:
 
   apps/web:
     dependencies:
-      '@rp-vibe-ideation/dashboard-app':
-        specifier: workspace:*
-        version: link:../../ideations/dashboard-app
-      '@rp-vibe-ideation/example-app':
-        specifier: workspace:*
-        version: link:../../ideations/example-app
       '@rp-vibe-ideation/ideation-registry':
         specifier: workspace:*
         version: link:../../packages/ideation-registry
@@ -261,10 +255,6 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.2.4(react@19.2.4)
-
-  ideations/dashboard-app: {}
-
-  ideations/example-app: {}
 
   ideations/react-app: {}
 

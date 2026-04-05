@@ -1,6 +1,6 @@
 ---
 name: execute-phase
-description: Execute all tasks in a project phase in order. Invoke as /execute-phase <number> (e.g. /execute-phase 1).
+description: Execute all tasks in a project phase in order. Invoke as /execute-phase <number> (e.g. /execute-phase 01).
 argument-hint: <phase-number>
 disable-model-invocation: true
 ---
@@ -14,7 +14,7 @@ Read these files before doing anything else:
 - `docs/spec/task-execution.md` — the per-task execution procedure
 - `docs/spec/instructions.md` — code quality rules, validation gates, git workflow
 - `docs/spec/architecture.md` — patterns and decisions
-- `docs/plan/phase-$ARGUMENTS.md` — the phase goal, prerequisites, and all tasks
+- `docs/plan/phase-$ARGUMENTS/index.md` — the phase goal, prerequisites, and all tasks
 
 ## Step 2 — Phase start checklist
 
@@ -28,7 +28,7 @@ Before touching any code, complete every item from `docs/spec/phase-execution.md
 
 ## Step 3 — Execute tasks in order
 
-For each task in `docs/plan/phase-$ARGUMENTS.md` with status `new`, in order:
+For each task in `docs/plan/phase-$ARGUMENTS/index.md` with status `new`, in order:
 
 1. Treat it as a call to `/execute-task <task-id>` — follow `docs/spec/task-execution.md` fully
 2. After the task commit, run `pnpm nx affected -t test` — fix any failures before moving to the next task
@@ -48,4 +48,4 @@ When all tasks have status `done`:
 2. Verify in production mode: `pnpm nx build web && pnpm nx start web` — confirm the phase goal holds against built output
 3. Re-read the phase goal statement and confirm it is genuinely met
 4. Update any spec docs that turned out to be inaccurate during execution
-5. Final commit: update all task statuses to `done` in `docs/plan/phase-$ARGUMENTS.md`
+5. Final commit: update all task statuses to `done` in the relevant task files under `docs/plan/phase-$ARGUMENTS/`

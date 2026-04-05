@@ -10,12 +10,6 @@
       "path": "./packages/ideation-registry"
     },
     {
-      "path": "./ideations/example-app"
-    },
-    {
-      "path": "./ideations/dashboard-app"
-    },
-    {
       "path": "./ideations/react-app"
     }
   ]

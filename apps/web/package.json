@@ -3,8 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@rp-vibe-ideation/dashboard-app": "workspace:*",
-    "@rp-vibe-ideation/example-app": "workspace:*",
     "@rp-vibe-ideation/ideation-registry": "workspace:*",
     "cmdk": "^1.1.1",
     "next": "~16.1.6",

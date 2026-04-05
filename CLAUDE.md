@@ -38,7 +38,7 @@ This project has structured documentation under `docs/`. Always consult the rele
 
 Use these skills to execute planned work:
 
-- `/execute-task <id>` — execute a single task (e.g. `/execute-task P1-001`)
-- `/execute-phase <n>` — execute all tasks in a phase in order (e.g. `/execute-phase 1`)
+- `/execute-task <id>` — execute a single task (e.g. `/execute-task p1-001`)
+- `/execute-phase <n>` — execute all tasks in a phase in order (e.g. `/execute-phase 01`)
 
 Both skills load the relevant plan file and spec docs automatically and follow the documented procedures in `docs/spec/task-execution.md` and `docs/spec/phase-execution.md`.
