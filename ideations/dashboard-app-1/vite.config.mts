@@ -17,6 +17,9 @@ export default defineConfig(() => ({
     host: 'localhost',
   },
   plugins: [tailwindcss(), react()],
+  esbuild: {
+    jsx: 'automatic' as const,
+  },
   resolve: {
     alias: {
       '@': path.resolve(import.meta.dirname, './src'),
