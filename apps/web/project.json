@@ -2,10 +2,18 @@
   "name": "@rp-vibe-ideation/web",
   "targets": {
     "build": {
-      "dependsOn": ["react-app:copy", "angular-app:copy", "dashboard-app-1:copy"]
+      "dependsOn": [
+        "@rp-vibe-ideation/react-app:copy",
+        "angular-app:copy",
+        "@rp-vibe-ideation/dashboard-app-1:copy"
+      ]
     },
     "dev": {
-      "dependsOn": ["react-app:copy", "angular-app:copy", "dashboard-app-1:copy"]
+      "dependsOn": [
+        "@rp-vibe-ideation/react-app:copy",
+        "angular-app:copy",
+        "@rp-vibe-ideation/dashboard-app-1:copy"
+      ]
     }
   }
 }
