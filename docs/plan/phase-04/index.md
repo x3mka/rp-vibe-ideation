@@ -1,6 +1,6 @@
 # Phase 04 — IntHub: Entity Model, API & Data
 
-**Status:** `planned`
+**Status:** `done`
 
 **Prerequisite:** Phase 03 complete.
 
@@ -82,8 +82,8 @@ HealthCheck → HealthCheckBinding[] → HealthCheckRun[]
 
 | Task | Title | Status |
 |---|---|---|
-| [p4-001](p4-001.md) | Create `inthub-entities` lib — all interfaces, types, enums, Database type | `planned` |
-| [p4-002](p4-002.md) | Create `inthub-api` lib — `makeApi()` factory and query functions | `planned` |
-| [p4-003](p4-003.md) | Create `inthub-data-inventory` lib — fake dataset for 2–3 orgs | `planned` |
-| [p4-004](p4-004.md) | Add unit tests for `inthub-api` | `planned` |
-| [p4-005](p4-005.md) | Add unit tests for `inthub-data-inventory` (referential integrity) | `planned` |
+| [p4-001](p4-001.md) | Create `inthub-entities` lib — all interfaces, types, enums, Database type | `done` |
+| [p4-002](p4-002.md) | Create `inthub-api` lib — `makeApi()` factory and query functions | `done` |
+| [p4-003](p4-003.md) | Create `inthub-data-inventory` lib — fake dataset for 2–3 orgs | `done` |
+| [p4-004](p4-004.md) | Add unit tests for `inthub-api` | `done` |
+| [p4-005](p4-005.md) | Add unit tests for `inthub-data-inventory` (referential integrity) | `done` |
