@@ -1,4 +1,4 @@
-# Phase 04 — IntHub: Entity Model & Glossary
+# Phase 04 — IntHub: Entity Model, API & Data
 
 **Status:** `planned`
 
@@ -8,9 +8,29 @@
 
 ## Goal
 
-Define the IntHub (Integration Hub) data model — all entity interfaces, types, enums, and fake data for 2–3 orgs. IntHub is a centralized inventory of integrations, credentials, and health checks for an MSSP that collects data from many tools and services.
+Build the foundation for all IntHub sub-apps: entity interfaces, an in-memory API wrapper, and the first dataset. IntHub is an Integration Hub for an MSSP company managing data pipelines, credentials, and health checks across many tools and services.
 
-This phase produces a shared TypeScript library (`packages/inthub-entities`) and the glossary document. No UI yet.
+### Architecture
+
+Three concerns, three package groups:
+
+```
+packages/
+├── inthub-entities/          # Interfaces, types, enums, Database type — no logic, no data
+├── inthub-api/               # makeApi(db) factory — query functions over any Database
+├── inthub-data-inventory/    # Fake dataset for inventory sub-app (Phase 05)
+├── inthub-data-credentials/  # (Phase 06)
+├── inthub-data-healthchecks/ # (Phase 07)
+└── inthub-data-provisioning/ # (Phase 08)
+```
+
+**Usage in sub-apps:**
+```ts
+import { makeApi } from '@rp-vibe-ideation/inthub-api';
+import { database } from '@rp-vibe-ideation/inthub-data-inventory';
+const api = makeApi(database);
+const orgs = api.getOrgs();
+```
 
 ### Entities
 
@@ -32,7 +52,7 @@ This phase produces a shared TypeScript library (`packages/inthub-entities`) and
 | HealthCheckRun | Single execution record of a HealthCheckBinding |
 | ScheduledTask | Unified scheduler for periodic operations (integration runs, health checks, provisioning) |
 
-### Key relationships
+### Key Relationships
 
 ```
 Provider
@@ -62,4 +82,8 @@ HealthCheck → HealthCheckBinding[] → HealthCheckRun[]
 
 | Task | Title | Status |
 |---|---|---|
-| | | |
+| [p4-001](p4-001.md) | Create `inthub-entities` lib — all interfaces, types, enums, Database type | `planned` |
+| [p4-002](p4-002.md) | Create `inthub-api` lib — `makeApi()` factory and query functions | `planned` |
+| [p4-003](p4-003.md) | Create `inthub-data-inventory` lib — fake dataset for 2–3 orgs | `planned` |
+| [p4-004](p4-004.md) | Add unit tests for `inthub-api` | `planned` |
+| [p4-005](p4-005.md) | Add unit tests for `inthub-data-inventory` (referential integrity) | `planned` |
