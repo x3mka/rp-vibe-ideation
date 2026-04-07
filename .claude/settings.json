@@ -1,4 +1,10 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(GITHUB_PAGES=true NEXT_PUBLIC_BASE_PATH=/rp-vibe-ideation BASE_PATH_PREFIX=/rp-vibe-ideation pnpm exec nx run react-app:build --skip-nx-cache)",
+      "Bash(curl -s https://x3mka.github.io/rp-vibe-ideation/apps/react-app/)"
+    ]
+  },
   "enabledPlugins": {
     "nx@nx-claude-plugins": true
   },
@@ -9,10 +15,5 @@
         "repo": "nrwl/nx-ai-agents-config"
       }
     }
-  },
-  "permissions": {
-    "allow": [
-      "Bash(GITHUB_PAGES=true NEXT_PUBLIC_BASE_PATH=/rp-vibe-ideation BASE_PATH_PREFIX=/rp-vibe-ideation pnpm exec nx run react-app:build --skip-nx-cache)"
-    ]
   }
 }
