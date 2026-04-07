@@ -319,6 +319,15 @@ importers:
         specifier: ^2.3.0
         version: 2.8.1
 
+  packages/inthub-data-inventory:
+    dependencies:
+      '@rp-vibe-ideation/inthub-entities':
+        specifier: workspace:*
+        version: link:../inthub-entities
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
+
   packages/inthub-entities:
     dependencies:
       tslib:
