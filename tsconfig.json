@@ -14,6 +14,15 @@
     },
     {
       "path": "./ideations/dashboard-app-1"
+    },
+    {
+      "path": "./packages/inthub-entities"
+    },
+    {
+      "path": "./packages/inthub-api"
+    },
+    {
+      "path": "./packages/inthub-data-inventory"
     }
   ]
 }
