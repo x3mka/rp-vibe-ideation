@@ -58,3 +58,5 @@ vite.config.*.timestamp*
 .angular
 
 __screenshots__/
+.tmp/
+screenshots/
