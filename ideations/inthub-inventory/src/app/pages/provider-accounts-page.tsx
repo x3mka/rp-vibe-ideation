@@ -14,7 +14,6 @@ import {
 import type { ProviderAccountStatus } from '@rp-vibe-ideation/inthub-entities';
 
 const api = makeApi(database);
-const providerAccounts = api.getProviderAccounts();
 
 function accountStatusVariant(status: ProviderAccountStatus): BadgeProps['variant'] {
   switch (status) {
@@ -29,7 +28,13 @@ function accountStatusVariant(status: ProviderAccountStatus): BadgeProps['varian
   }
 }
 
-export function ProviderAccountsPage(): ReactElement {
+export function ProviderAccountsPage({
+  selectedOrgId,
+}: {
+  selectedOrgId: string | null;
+}): ReactElement {
+  const providerAccounts = api.getProviderAccounts(selectedOrgId ? { orgId: selectedOrgId } : {});
+
   return (
     <div>
       <h2 className="text-xl font-semibold mb-4">Provider Accounts</h2>

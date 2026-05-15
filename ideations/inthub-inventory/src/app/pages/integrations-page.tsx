@@ -14,7 +14,6 @@ import {
 import type { IntegrationStatus } from '@rp-vibe-ideation/inthub-entities';
 
 const api = makeApi(database);
-const integrations = api.getIntegrations();
 
 function integrationStatusVariant(status: IntegrationStatus): BadgeProps['variant'] {
   switch (status) {
@@ -31,7 +30,13 @@ function integrationStatusVariant(status: IntegrationStatus): BadgeProps['varian
   }
 }
 
-export function IntegrationsPage(): ReactElement {
+export function IntegrationsPage({
+  selectedOrgId,
+}: {
+  selectedOrgId: string | null;
+}): ReactElement {
+  const integrations = api.getIntegrations(selectedOrgId ? { orgId: selectedOrgId } : {});
+
   return (
     <div>
       <h2 className="text-xl font-semibold mb-4">Integrations</h2>

@@ -14,7 +14,6 @@ import {
 import type { CredentialStatus } from '@rp-vibe-ideation/inthub-entities';
 
 const api = makeApi(database);
-const credentials = api.getCredentials();
 
 function credentialStatusVariant(status: CredentialStatus): BadgeProps['variant'] {
   switch (status) {
@@ -31,7 +30,19 @@ function credentialStatusVariant(status: CredentialStatus): BadgeProps['variant'
   }
 }
 
-export function CredentialsPage(): ReactElement {
+export function CredentialsPage({
+  selectedOrgId,
+}: {
+  selectedOrgId: string | null;
+}): ReactElement {
+  const allCredentials = api.getCredentials();
+  const credentials = selectedOrgId
+    ? allCredentials.filter((c) => {
+        const account = api.getProviderAccount(c.providerAccountId);
+        return account?.orgId === selectedOrgId;
+      })
+    : allCredentials;
+
   return (
     <div>
       <h2 className="text-xl font-semibold mb-4">Credentials</h2>

@@ -19,24 +19,29 @@ interface BreadcrumbEntry {
 }
 
 const breadcrumbMap: Record<string, BreadcrumbEntry> = {
+  'provider-accounts': { section: 'Main', label: 'Provider Accounts' },
+  credentials: { section: 'Main', label: 'Credentials' },
+  integrations: { section: 'Main', label: 'Integrations' },
   providers: { section: 'Dictionaries', label: 'Providers' },
   'credential-types': { section: 'Dictionaries', label: 'Credential Types' },
   'integration-types': { section: 'Dictionaries', label: 'Integration Types' },
   'integration-runtimes': { section: 'Dictionaries', label: 'Integration Runtimes' },
-  orgs: { section: 'Main', label: 'Orgs' },
-  'provider-accounts': { section: 'Main', label: 'Provider Accounts' },
-  credentials: { section: 'Main', label: 'Credentials' },
-  integrations: { section: 'Main', label: 'Integrations' },
 };
 
 export function App(): ReactElement {
-  const [activeView, setActiveView] = useState<string>('providers');
+  const [activeView, setActiveView] = useState<string>('provider-accounts');
+  const [selectedOrgId, setSelectedOrgId] = useState<string | null>(null);
 
   const breadcrumb = breadcrumbMap[activeView] ?? { section: '', label: activeView };
 
   return (
     <SidebarProvider>
-      <AppSidebar activeView={activeView} onNavigate={setActiveView} />
+      <AppSidebar
+        activeView={activeView}
+        onNavigate={setActiveView}
+        selectedOrgId={selectedOrgId}
+        onOrgChange={setSelectedOrgId}
+      />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
@@ -56,7 +61,7 @@ export function App(): ReactElement {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <PageRouter activeView={activeView} />
+          <PageRouter activeView={activeView} selectedOrgId={selectedOrgId} />
         </div>
       </SidebarInset>
     </SidebarProvider>

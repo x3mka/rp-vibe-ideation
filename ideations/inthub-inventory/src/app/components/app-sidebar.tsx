@@ -5,6 +5,7 @@ import {
   BadgeCheck,
   Bell,
   Building2,
+  Check,
   Cpu,
   ChevronsUpDown,
   CreditCard,
@@ -18,12 +19,12 @@ import {
   Workflow,
   type LucideIcon,
 } from 'lucide-react';
+import { database } from '@rp-vibe-ideation/inthub-data-inventory';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -52,7 +53,6 @@ interface NavItem {
 }
 
 const navMain: NavItem[] = [
-  { title: 'Orgs', icon: Building2, view: 'orgs' },
   { title: 'Provider Accounts', icon: Server, view: 'provider-accounts' },
   { title: 'Credentials', icon: KeyRound, view: 'credentials' },
   { title: 'Integrations', icon: ArrowLeftRight, view: 'integrations' },
@@ -80,6 +80,65 @@ function IntHubHeader(): ReactElement {
             <span className="truncate text-xs text-muted-foreground">Integration Hub</span>
           </div>
         </SidebarMenuButton>
+      </SidebarMenuItem>
+    </SidebarMenu>
+  );
+}
+
+// --- OrgSwitcher ---
+
+interface OrgSwitcherProps {
+  orgs: { id: string; name: string }[];
+  selectedOrgId: string | null;
+  onOrgChange: (orgId: string | null) => void;
+}
+
+function OrgSwitcher({ orgs, selectedOrgId, onOrgChange }: OrgSwitcherProps): ReactElement {
+  const selectedOrg = orgs.find((o) => o.id === selectedOrgId);
+  const label = selectedOrg?.name ?? 'All Orgs';
+
+  return (
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <SidebarMenuButton
+              size="lg"
+              tooltip={label}
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+            >
+              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                <Building2 className="size-4" />
+              </div>
+              <div className="grid flex-1 text-left text-sm leading-tight">
+                <span className="truncate font-semibold">{label}</span>
+                <span className="truncate text-xs text-muted-foreground">Filter by org</span>
+              </div>
+              <ChevronsUpDown className="ml-auto size-4" />
+            </SidebarMenuButton>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+            side="bottom"
+            align="start"
+            sideOffset={4}
+          >
+            <DropdownMenuLabel>Organisation</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => onOrgChange(null)}>
+              <Check className={`size-4 ${selectedOrgId === null ? 'opacity-100' : 'opacity-0'}`} />
+              All Orgs
+            </DropdownMenuItem>
+            {orgs.map((org) => (
+              <DropdownMenuItem key={org.id} onClick={() => onOrgChange(org.id)}>
+                <Check
+                  className={`size-4 ${selectedOrgId === org.id ? 'opacity-100' : 'opacity-0'}`}
+                />
+                {org.name}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
   );
@@ -172,27 +231,23 @@ function NavUser({ user }: { user: User }): ReactElement {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
+            <DropdownMenuItem>
+              <Sparkles />
+              Upgrade to Pro
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
+            <DropdownMenuItem>
+              <BadgeCheck />
+              Account
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <CreditCard />
+              Billing
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Bell />
+              Notifications
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
@@ -210,15 +265,28 @@ function NavUser({ user }: { user: User }): ReactElement {
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   activeView: string;
   onNavigate: (view: string) => void;
+  selectedOrgId: string | null;
+  onOrgChange: (orgId: string | null) => void;
 }
 
-export function AppSidebar({ activeView, onNavigate, ...props }: AppSidebarProps): ReactElement {
+export function AppSidebar({
+  activeView,
+  onNavigate,
+  selectedOrgId,
+  onOrgChange,
+  ...props
+}: AppSidebarProps): ReactElement {
+  const orgs = database.orgs.map((o) => ({ id: o.id, name: o.name }));
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <IntHubHeader />
       </SidebarHeader>
       <SidebarContent>
+        <SidebarGroup>
+          <OrgSwitcher orgs={orgs} selectedOrgId={selectedOrgId} onOrgChange={onOrgChange} />
+        </SidebarGroup>
         <NavSection
           label="Main"
           items={navMain}

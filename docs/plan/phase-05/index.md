@@ -46,4 +46,4 @@ Mirrors `dashboard-app-1`: collapsible shadcn sidebar (SidebarProvider pattern) 
 | [p5-011](p5-011.md) | Integrations page — list all integrations with org, type, accounts, status | `done` |
 | [p5-012](p5-012.md) | Wire navigation + breadcrumbs, add smoke test, verify `pnpm nx build web` | `done` |
 | [p5-013](p5-013.md) | Adjust `inthub-data-inventory` dataset — replace Snowflake/Splunk with ClickHouse/Sentinel, update runtime URLs, remap all integration targets | `done` |
-| [p5-014](p5-014.md) | Org switcher above Main section — remove Orgs page, add org dropdown, filter Provider Accounts / Credentials / Integrations by selected org | `planned` |
+| [p5-014](p5-014.md) | Org switcher above Main section — remove Orgs page, add org dropdown, filter Provider Accounts / Credentials / Integrations by selected org | `done` |
