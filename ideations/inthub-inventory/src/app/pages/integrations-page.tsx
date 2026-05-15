@@ -1,0 +1,76 @@
+import type { ReactElement } from 'react';
+import { makeApi } from '@rp-vibe-ideation/inthub-api';
+import { database } from '@rp-vibe-ideation/inthub-data-inventory';
+import { Badge } from '@/components/ui/badge';
+import type { BadgeProps } from '@/components/ui/badge';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import type { IntegrationStatus } from '@rp-vibe-ideation/inthub-entities';
+
+const api = makeApi(database);
+const integrations = api.getIntegrations();
+
+function integrationStatusVariant(status: IntegrationStatus): BadgeProps['variant'] {
+  switch (status) {
+    case 'Active':
+      return 'default';
+    case 'Paused':
+      return 'secondary';
+    case 'Failed':
+      return 'destructive';
+    case 'Decommissioned':
+      return 'outline';
+    default:
+      return 'outline';
+  }
+}
+
+export function IntegrationsPage(): ReactElement {
+  return (
+    <div>
+      <h2 className="text-xl font-semibold mb-4">Integrations</h2>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead>Org</TableHead>
+            <TableHead>Integration Type</TableHead>
+            <TableHead>Source → Target</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Last Run</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {integrations.map((intg) => {
+            const org = api.getOrg(intg.orgId);
+            const intType = api.getIntegrationType(intg.integrationTypeId);
+            const sourceAccount = api.getProviderAccount(intg.sourceAccountId);
+            const targetAccount = api.getProviderAccount(intg.targetAccountId);
+            return (
+              <TableRow key={intg.id}>
+                <TableCell className="font-medium">{intg.name}</TableCell>
+                <TableCell>{org?.name ?? '—'}</TableCell>
+                <TableCell>{intType?.name ?? '—'}</TableCell>
+                <TableCell className="text-muted-foreground">
+                  {sourceAccount?.name ?? '—'} → {targetAccount?.name ?? '—'}
+                </TableCell>
+                <TableCell>
+                  <Badge variant={integrationStatusVariant(intg.status)}>{intg.status}</Badge>
+                </TableCell>
+                <TableCell className="text-muted-foreground">
+                  {intg.lastRunAt ? new Date(intg.lastRunAt).toLocaleDateString() : '—'}
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}
