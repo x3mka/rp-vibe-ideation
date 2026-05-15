@@ -12,6 +12,7 @@
     "@radix-ui/react-tooltip": "^1.2.7",
     "@rp-vibe-ideation/inthub-api": "workspace:*",
     "@rp-vibe-ideation/inthub-data-inventory": "workspace:*",
+    "@rp-vibe-ideation/inthub-entities": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.7.0",

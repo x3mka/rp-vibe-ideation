@@ -32,6 +32,9 @@
   "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"],
   "references": [
     {
+      "path": "../../packages/inthub-entities/tsconfig.lib.json"
+    },
+    {
       "path": "../../packages/inthub-data-inventory/tsconfig.lib.json"
     },
     {
