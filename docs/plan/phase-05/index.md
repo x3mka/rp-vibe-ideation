@@ -1,6 +1,6 @@
 # Phase 05 — IntHub: Inventory (Stage 1)
 
-**Status:** `in-progress`
+**Status:** `done`
 
 **Prerequisite:** Phase 04 complete.
 
@@ -33,15 +33,15 @@ Mirrors `dashboard-app-1`: collapsible shadcn sidebar (SidebarProvider pattern) 
 
 | Task | Title | Status |
 |---|---|---|
-| [p5-001](p5-001.md) | Scaffold `ideations/inthub-inventory` — Nx generator, base path, port, copy target, registry entry | `planned` |
-| [p5-002](p5-002.md) | Layout foundation — copy shadcn UI components + add Table/Badge, Tailwind setup, bare `App` skeleton | `planned` |
-| [p5-003](p5-003.md) | `AppSidebar` — IntHub branding header, NavMain, NavDictionaries, NavUser | `planned` |
-| [p5-004](p5-004.md) | Providers page — list all providers with category badge | `planned` |
-| [p5-005](p5-005.md) | Credential Types page — list all credential types with provider join | `planned` |
-| [p5-006](p5-006.md) | Integration Types page — list all integration types with source/target/runtime | `planned` |
-| [p5-007](p5-007.md) | Integration Runtimes page — list all runtimes with type and status badges | `planned` |
-| [p5-008](p5-008.md) | Orgs page — list all orgs with status badge and provider account count | `planned` |
-| [p5-009](p5-009.md) | Provider Accounts page — list all provider accounts with org, provider, status | `planned` |
-| [p5-010](p5-010.md) | Credentials page — list all credentials with status badge and expiry | `planned` |
-| [p5-011](p5-011.md) | Integrations page — list all integrations with org, type, accounts, status | `planned` |
-| [p5-012](p5-012.md) | Wire navigation + breadcrumbs, add smoke test, verify `pnpm nx build web` | `planned` |
+| [p5-001](p5-001.md) | Scaffold `ideations/inthub-inventory` — Nx generator, base path, port, copy target, registry entry | `done` |
+| [p5-002](p5-002.md) | Layout foundation — copy shadcn UI components + add Table/Badge, Tailwind setup, bare `App` skeleton | `done` |
+| [p5-003](p5-003.md) | `AppSidebar` — IntHub branding header, NavMain, NavDictionaries, NavUser | `done` |
+| [p5-004](p5-004.md) | Providers page — list all providers with category badge | `done` |
+| [p5-005](p5-005.md) | Credential Types page — list all credential types with provider join | `done` |
+| [p5-006](p5-006.md) | Integration Types page — list all integration types with source/target/runtime | `done` |
+| [p5-007](p5-007.md) | Integration Runtimes page — list all runtimes with type and status badges | `done` |
+| [p5-008](p5-008.md) | Orgs page — list all orgs with status badge and provider account count | `done` |
+| [p5-009](p5-009.md) | Provider Accounts page — list all provider accounts with org, provider, status | `done` |
+| [p5-010](p5-010.md) | Credentials page — list all credentials with status badge and expiry | `done` |
+| [p5-011](p5-011.md) | Integrations page — list all integrations with org, type, accounts, status | `done` |
+| [p5-012](p5-012.md) | Wire navigation + breadcrumbs, add smoke test, verify `pnpm nx build web` | `done` |
