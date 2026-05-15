@@ -4,9 +4,11 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
+const basePath = process.env['NEXT_PUBLIC_BASE_PATH'] ?? '';
+
 export default defineConfig(() => ({
   root: import.meta.dirname,
-  base: '/apps/inthub-v1/',
+  base: `${basePath}/apps/inthub-v1/`,
   cacheDir: '../../node_modules/.vite/ideations/inthub-v1',
   server: {
     port: 4204,

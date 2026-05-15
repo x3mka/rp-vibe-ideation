@@ -2,9 +2,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+const basePath = process.env['NEXT_PUBLIC_BASE_PATH'] ?? '';
+
 export default defineConfig(() => ({
   root: import.meta.dirname,
-  base: '/apps/react-app/',
+  base: `${basePath}/apps/react-app/`,
   cacheDir: '../../node_modules/.vite/ideations/react-app',
   server: {
     port: 4201,

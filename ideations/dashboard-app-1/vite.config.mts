@@ -4,9 +4,11 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
+const basePath = process.env['NEXT_PUBLIC_BASE_PATH'] ?? '';
+
 export default defineConfig(() => ({
   root: import.meta.dirname,
-  base: '/apps/dashboard-app-1/',
+  base: `${basePath}/apps/dashboard-app-1/`,
   cacheDir: '../../node_modules/.vite/ideations/dashboard-app-1',
   server: {
     port: 4203,
