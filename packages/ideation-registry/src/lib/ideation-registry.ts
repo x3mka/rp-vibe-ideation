@@ -35,6 +35,14 @@ export const registry: IdeationApp[] = [
     url: '/apps/dashboard-app-1',
     devUrl: 'http://localhost:4203',
   },
+  {
+    id: 'inthub-inventory',
+    name: 'IntHub Inventory',
+    description: 'Read-only inventory view of the IntHub data model',
+    group: 'IntHub',
+    url: '/apps/inthub-inventory',
+    devUrl: 'http://localhost:4204',
+  },
 ];
 
 /** Registry entries grouped by their `group` field (ungrouped → "Other"). */

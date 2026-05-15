@@ -1,0 +1,10 @@
+{
+  "name": "@rp-vibe-ideation/inthub-inventory",
+  "targets": {
+    "copy": {
+      "dependsOn": ["build"],
+      "command": "node -e \"require('fs').cpSync('ideations/inthub-inventory/dist','apps/web/public/apps/inthub-inventory',{recursive:true,force:true})\"",
+      "options": { "cwd": "{workspaceRoot}" }
+    }
+  }
+}

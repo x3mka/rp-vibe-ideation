@@ -23,6 +23,9 @@
     },
     {
       "path": "./packages/inthub-data-inventory"
+    },
+    {
+      "path": "./ideations/inthub-inventory"
     }
   ]
 }
