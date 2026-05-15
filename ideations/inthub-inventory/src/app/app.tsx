@@ -11,9 +11,28 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/app/components/app-sidebar';
+import { PageRouter } from '@/app/page-router';
+
+interface BreadcrumbEntry {
+  section: string;
+  label: string;
+}
+
+const breadcrumbMap: Record<string, BreadcrumbEntry> = {
+  providers: { section: 'Dictionaries', label: 'Providers' },
+  'credential-types': { section: 'Dictionaries', label: 'Credential Types' },
+  'integration-types': { section: 'Dictionaries', label: 'Integration Types' },
+  'integration-runtimes': { section: 'Dictionaries', label: 'Integration Runtimes' },
+  orgs: { section: 'Main', label: 'Orgs' },
+  'provider-accounts': { section: 'Main', label: 'Provider Accounts' },
+  credentials: { section: 'Main', label: 'Credentials' },
+  integrations: { section: 'Main', label: 'Integrations' },
+};
 
 export function App(): ReactElement {
   const [activeView, setActiveView] = useState<string>('providers');
+
+  const breadcrumb = breadcrumbMap[activeView] ?? { section: '', label: activeView };
 
   return (
     <SidebarProvider>
@@ -26,18 +45,18 @@ export function App(): ReactElement {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">Dictionaries</BreadcrumbLink>
+                  <BreadcrumbLink href="#">{breadcrumb.section}</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Providers</BreadcrumbPage>
+                  <BreadcrumbPage>{breadcrumb.label}</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <p className="text-muted-foreground text-sm">Active view: {activeView}</p>
+          <PageRouter activeView={activeView} />
         </div>
       </SidebarInset>
     </SidebarProvider>
