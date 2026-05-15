@@ -36,11 +36,11 @@ export const registry: IdeationApp[] = [
     devUrl: 'http://localhost:4203',
   },
   {
-    id: 'inthub-inventory',
-    name: 'IntHub Inventory',
+    id: 'inthub-v1',
+    name: 'IntHub v1',
     description: 'Read-only inventory view of the IntHub data model',
     group: 'IntHub',
-    url: '/apps/inthub-inventory',
+    url: '/apps/inthub-v1',
     devUrl: 'http://localhost:4204',
   },
 ];

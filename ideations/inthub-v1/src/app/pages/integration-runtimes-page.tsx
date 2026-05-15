@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { database } from '@rp-vibe-ideation/inthub-data-inventory';
+import { database } from '@rp-vibe-ideation/inthub-data';
 import { Badge } from '@/components/ui/badge';
 import type { BadgeProps } from '@/components/ui/badge';
 import {

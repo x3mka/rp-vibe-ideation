@@ -35,7 +35,7 @@
       "path": "../../packages/inthub-entities/tsconfig.lib.json"
     },
     {
-      "path": "../../packages/inthub-data-inventory/tsconfig.lib.json"
+      "path": "../../packages/inthub-data/tsconfig.lib.json"
     },
     {
       "path": "../../packages/inthub-api/tsconfig.lib.json"

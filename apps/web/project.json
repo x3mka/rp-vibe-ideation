@@ -6,7 +6,7 @@
         "@rp-vibe-ideation/react-app:copy",
         "angular-app:copy",
         "@rp-vibe-ideation/dashboard-app-1:copy",
-        "@rp-vibe-ideation/inthub-inventory:copy"
+        "@rp-vibe-ideation/inthub-v1:copy"
       ]
     },
     "dev": {
@@ -14,7 +14,7 @@
         "@rp-vibe-ideation/react-app:copy",
         "angular-app:copy",
         "@rp-vibe-ideation/dashboard-app-1:copy",
-        "@rp-vibe-ideation/inthub-inventory:copy"
+        "@rp-vibe-ideation/inthub-v1:copy"
       ]
     }
   }

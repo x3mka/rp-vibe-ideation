@@ -12,14 +12,13 @@ import {
   KeyRound,
   Lock,
   LogOut,
-  Network,
   Package,
   Server,
   Sparkles,
   Workflow,
   type LucideIcon,
 } from 'lucide-react';
-import { database } from '@rp-vibe-ideation/inthub-data-inventory';
+import { database } from '@rp-vibe-ideation/inthub-data';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -36,7 +35,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -64,26 +62,6 @@ const navDictionaries: NavItem[] = [
   { title: 'Integration Types', icon: Workflow, view: 'integration-types' },
   { title: 'Integration Runtimes', icon: Cpu, view: 'integration-runtimes' },
 ];
-
-// --- IntHubHeader ---
-
-function IntHubHeader(): ReactElement {
-  return (
-    <SidebarMenu>
-      <SidebarMenuItem>
-        <SidebarMenuButton size="lg" className="pointer-events-none">
-          <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-            <Network className="size-4" />
-          </div>
-          <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-semibold">IntHub</span>
-            <span className="truncate text-xs text-muted-foreground">Integration Hub</span>
-          </div>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-    </SidebarMenu>
-  );
-}
 
 // --- OrgSwitcher ---
 
@@ -280,9 +258,6 @@ export function AppSidebar({
 
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <IntHubHeader />
-      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <OrgSwitcher orgs={orgs} selectedOrgId={selectedOrgId} onOrgChange={onOrgChange} />

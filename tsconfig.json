@@ -22,10 +22,10 @@
       "path": "./packages/inthub-api"
     },
     {
-      "path": "./packages/inthub-data-inventory"
+      "path": "./packages/inthub-data"
     },
     {
-      "path": "./ideations/inthub-inventory"
+      "path": "./ideations/inthub-v1"
     }
   ]
 }

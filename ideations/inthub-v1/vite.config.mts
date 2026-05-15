@@ -6,8 +6,8 @@ import path from 'path';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
-  base: '/apps/inthub-inventory/',
-  cacheDir: '../../node_modules/.vite/ideations/inthub-inventory',
+  base: '/apps/inthub-v1/',
+  cacheDir: '../../node_modules/.vite/ideations/inthub-v1',
   server: {
     port: 4204,
     host: 'localhost',

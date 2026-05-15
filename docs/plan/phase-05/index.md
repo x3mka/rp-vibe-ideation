@@ -1,6 +1,6 @@
 # Phase 05 — IntHub: Inventory (Stage 1)
 
-**Status:** `in-progress`
+**Status:** `done`
 
 **Prerequisite:** Phase 04 complete.
 
@@ -8,24 +8,24 @@
 
 ## Goal
 
-Build a React+Vite sub-app (`ideations/inthub-inventory`) that provides a read-only inventory view of the IntHub data model. All data is fake/hardcoded from the `inthub-data-inventory` package, queried via `inthub-api`.
+Build a React+Vite sub-app (`ideations/inthub-v1`) that provides a read-only inventory view of the IntHub data model. All data is fake/hardcoded from the `inthub-data` package, queried via `inthub-api`.
 
-This is an **admin/operations tool** — all entities are shown globally across all orgs, with an Org column where relevant. No per-org filtering or org switcher.
+This is an **admin/operations tool** with an org switcher above the Main section; selecting an org filters Provider Accounts, Credentials, and Integrations.
 
 ### Layout
 
 Mirrors `dashboard-app-1`: collapsible shadcn sidebar (SidebarProvider pattern) with two nav sections:
 
-- **Main**: Orgs, Provider Accounts, Credentials, Integrations
+- **Main**: Provider Accounts, Credentials, Integrations (filterable by org via OrgSwitcher)
 - **Dictionaries**: Providers, Credential Types, Integration Types, Integration Runtimes
 
 ### Features
 
-- Sidebar with IntHub branding header, Main section, Dictionaries section, NavUser footer
-- Read-only list/table pages for all 8 entity views
+- Sidebar with OrgSwitcher (All Orgs / per-org filter), Main section, Dictionaries section, NavUser footer
+- Read-only list/table pages for all 7 entity views
 - Status badges color-coded by enum value
 - Sidebar collapses to icon mode
-- Registered in ideation-registry at `/apps/inthub-inventory` (dev: `http://localhost:4204`)
+- Registered in ideation-registry at `/apps/inthub-v1` (dev: `http://localhost:4204`)
 
 ---
 
@@ -47,4 +47,4 @@ Mirrors `dashboard-app-1`: collapsible shadcn sidebar (SidebarProvider pattern) 
 | [p5-012](p5-012.md) | Wire navigation + breadcrumbs, add smoke test, verify `pnpm nx build web` | `done` |
 | [p5-013](p5-013.md) | Adjust `inthub-data-inventory` dataset — replace Snowflake/Splunk with ClickHouse/Sentinel, update runtime URLs, remap all integration targets | `done` |
 | [p5-014](p5-014.md) | Org switcher above Main section — remove Orgs page, add org dropdown, filter Provider Accounts / Credentials / Integrations by selected org | `done` |
-| [p5-015](p5-015.md) | Rename inthub-inventory → inthub-v1, inthub-data-inventory → inthub-data, remove sidebar IntHub header | `planned` |
+| [p5-015](p5-015.md) | Rename inthub-inventory → inthub-v1, inthub-data-inventory → inthub-data, remove sidebar IntHub header | `done` |

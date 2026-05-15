@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { makeApi } from '@rp-vibe-ideation/inthub-api';
-import { database } from '@rp-vibe-ideation/inthub-data-inventory';
+import { database } from '@rp-vibe-ideation/inthub-data';
 import {
   Table,
   TableBody,

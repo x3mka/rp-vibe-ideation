@@ -1,5 +1,5 @@
 {
-  "name": "@rp-vibe-ideation/inthub-inventory",
+  "name": "@rp-vibe-ideation/inthub-v1",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -11,7 +11,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.7",
     "@rp-vibe-ideation/inthub-api": "workspace:*",
-    "@rp-vibe-ideation/inthub-data-inventory": "workspace:*",
+    "@rp-vibe-ideation/inthub-data": "workspace:*",
     "@rp-vibe-ideation/inthub-entities": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
