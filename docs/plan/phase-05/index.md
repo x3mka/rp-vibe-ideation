@@ -1,6 +1,6 @@
 # Phase 05 — IntHub: Inventory (Stage 1)
 
-**Status:** `done`
+**Status:** `in-progress`
 
 **Prerequisite:** Phase 04 complete.
 
@@ -45,3 +45,4 @@ Mirrors `dashboard-app-1`: collapsible shadcn sidebar (SidebarProvider pattern) 
 | [p5-010](p5-010.md) | Credentials page — list all credentials with status badge and expiry | `done` |
 | [p5-011](p5-011.md) | Integrations page — list all integrations with org, type, accounts, status | `done` |
 | [p5-012](p5-012.md) | Wire navigation + breadcrumbs, add smoke test, verify `pnpm nx build web` | `done` |
+| [p5-013](p5-013.md) | Adjust `inthub-data-inventory` dataset — replace Snowflake/Splunk with ClickHouse/Sentinel, update runtime URLs, remap all integration targets | `done` |
