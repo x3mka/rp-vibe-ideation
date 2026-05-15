@@ -38,11 +38,23 @@ Go through each bullet point in the task's **Definition of done** explicitly. Do
 Before marking done, run the full set from [instructions.md](./instructions.md):
 
 ```bash
-pnpm nx lint web
-pnpm nx build web
 pnpm nx affected -t test
 pnpm nx run-many -t typecheck
+pnpm nx lint web
+pnpm nx build web          # builds all sub-apps and copies assets via dependsOn
 ```
+
+`pnpm nx build web` is the authoritative gate — it triggers every sub-app's `build` then `copy` target before the shell build. Do **not** substitute a bare sub-app build (e.g., `pnpm nx build inthub-inventory`) and assume the static assets in `public/apps/` are current; they are only updated by the `copy` step.
+
+### Verify all apps load
+
+After the build, confirm the shell serves every registered app correctly:
+
+```bash
+pnpm nx start web          # serves the production build on http://localhost:3000
+```
+
+Open `http://localhost:3000` and cycle through every app in the switcher. Each app must render its content — a blank iframe or connection error is a build failure, not a caching issue. If any app fails, re-run `pnpm nx build web` and hard-refresh before investigating further.
 
 ### Update task status
 Change the task's `**Status:**` field in the phase plan file from `new` to `done`.
