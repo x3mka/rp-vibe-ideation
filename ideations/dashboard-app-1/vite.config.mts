@@ -6,7 +6,7 @@ import path from 'path';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
-  base: './',
+  base: '/apps/dashboard-app-1/',
   cacheDir: '../../node_modules/.vite/ideations/dashboard-app-1',
   server: {
     port: 4203,
