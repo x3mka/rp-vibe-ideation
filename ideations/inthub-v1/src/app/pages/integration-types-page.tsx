@@ -11,12 +11,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import type { IntegrationTypeStatus } from '@rp-vibe-ideation/inthub-entities';
+import type { IntegrationTypeStatus, IntegrationTypeKind } from '@rp-vibe-ideation/inthub-entities';
 
 const api = makeApi(database);
 const integrationTypes = api.getIntegrationTypes();
 
-function integrationTypeStatusVariant(status: IntegrationTypeStatus): BadgeProps['variant'] {
+function statusVariant(status: IntegrationTypeStatus): BadgeProps['variant'] {
   switch (status) {
     case 'Active':
       return 'default';
@@ -29,6 +29,10 @@ function integrationTypeStatusVariant(status: IntegrationTypeStatus): BadgeProps
   }
 }
 
+function kindVariant(kind: IntegrationTypeKind): BadgeProps['variant'] {
+  return kind === 'Provisioning' ? 'secondary' : 'outline';
+}
+
 export function IntegrationTypesPage(): ReactElement {
   return (
     <div>
@@ -37,7 +41,8 @@ export function IntegrationTypesPage(): ReactElement {
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
-            <TableHead>Source → Target</TableHead>
+            <TableHead>Kind</TableHead>
+            <TableHead>Description</TableHead>
             <TableHead>Runtime</TableHead>
             <TableHead>Version</TableHead>
             <TableHead>Status</TableHead>
@@ -45,20 +50,19 @@ export function IntegrationTypesPage(): ReactElement {
         </TableHeader>
         <TableBody>
           {integrationTypes.map((it) => {
-            const sourceName = api.getProvider(it.sourceProviderId)?.name ?? '—';
-            const targetName = api.getProvider(it.targetProviderId)?.name ?? '—';
             const runtime =
               database.integrationRuntimes.find((r) => r.id === it.runtimeId)?.name ?? '—';
             return (
               <TableRow key={it.id}>
                 <TableCell className="font-medium">{it.name}</TableCell>
-                <TableCell className="text-muted-foreground">
-                  {sourceName} → {targetName}
+                <TableCell>
+                  <Badge variant={kindVariant(it.kind)}>{it.kind}</Badge>
                 </TableCell>
+                <TableCell className="text-muted-foreground text-sm">{it.description ?? '—'}</TableCell>
                 <TableCell>{runtime}</TableCell>
                 <TableCell className="text-muted-foreground">{it.version}</TableCell>
                 <TableCell>
-                  <Badge variant={integrationTypeStatusVariant(it.status)}>{it.status}</Badge>
+                  <Badge variant={statusVariant(it.status)}>{it.status}</Badge>
                 </TableCell>
               </TableRow>
             );

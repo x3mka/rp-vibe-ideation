@@ -39,7 +39,7 @@ export function makeIntegrationsApi(db: Database): IntegrationsApi {
       const orgIntegrations = db.integrations.filter((i) => i.orgId === orgId);
       const accountIds = new Set<string>();
       for (const integration of orgIntegrations) {
-        accountIds.add(integration.sourceAccountId);
+        if (integration.sourceAccountId) accountIds.add(integration.sourceAccountId);
         accountIds.add(integration.targetAccountId);
       }
       const nodes = db.providerAccounts.filter((a) => accountIds.has(a.id));

@@ -4,10 +4,16 @@ export enum IntegrationTypeStatus {
   Draft = 'Draft',
 }
 
+export enum IntegrationTypeKind {
+  DataPipeline = 'DataPipeline',
+  Provisioning = 'Provisioning',
+}
+
 export interface IntegrationType {
   id: string;
   name: string;
-  sourceProviderId: string;
+  kind: IntegrationTypeKind;
+  sourceProviderId?: string;
   targetProviderId: string;
   runtimeId: string;
   version: string;

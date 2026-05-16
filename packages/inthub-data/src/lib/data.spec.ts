@@ -89,7 +89,8 @@ describe('Foreign key integrity', () => {
   });
 
   it('Integration.sourceAccountId → providerAccounts', () => {
-    allExist(db.integrations.map((i) => i.sourceAccountId), providerAccountIds, 'Integration.sourceAccountId');
+    const ids = db.integrations.map((i) => i.sourceAccountId).filter((id): id is string => id !== undefined);
+    allExist(ids, providerAccountIds, 'Integration.sourceAccountId');
   });
 
   it('Integration.targetAccountId → providerAccounts', () => {

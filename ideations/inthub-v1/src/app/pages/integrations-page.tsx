@@ -46,7 +46,6 @@ export function IntegrationsPage({
             <TableHead>Name</TableHead>
             <TableHead>Org</TableHead>
             <TableHead>Integration Type</TableHead>
-            <TableHead>Source → Target</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Last Run</TableHead>
           </TableRow>
@@ -55,16 +54,11 @@ export function IntegrationsPage({
           {integrations.map((intg) => {
             const org = api.getOrg(intg.orgId);
             const intType = api.getIntegrationType(intg.integrationTypeId);
-            const sourceAccount = api.getProviderAccount(intg.sourceAccountId);
-            const targetAccount = api.getProviderAccount(intg.targetAccountId);
             return (
               <TableRow key={intg.id}>
                 <TableCell className="font-medium">{intg.name}</TableCell>
                 <TableCell>{org?.name ?? '—'}</TableCell>
                 <TableCell>{intType?.name ?? '—'}</TableCell>
-                <TableCell className="text-muted-foreground">
-                  {sourceAccount?.name ?? '—'} → {targetAccount?.name ?? '—'}
-                </TableCell>
                 <TableCell>
                   <Badge variant={integrationStatusVariant(intg.status)}>{intg.status}</Badge>
                 </TableCell>

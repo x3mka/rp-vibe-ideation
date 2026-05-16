@@ -9,7 +9,7 @@ export interface Integration {
   id: string;
   orgId: string;
   integrationTypeId: string;
-  sourceAccountId: string;
+  sourceAccountId?: string;
   targetAccountId: string;
   sourceCredentialId?: string;
   targetCredentialId?: string;
