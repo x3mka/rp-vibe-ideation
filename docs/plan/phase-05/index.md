@@ -50,3 +50,4 @@ Mirrors `dashboard-app-1`: collapsible shadcn sidebar (SidebarProvider pattern) 
 | [p5-015](p5-015.md) | Rename inthub-inventory → inthub-v1, inthub-data-inventory → inthub-data, remove sidebar IntHub header | `done` |
 | [p5-016](p5-016.md) | ProviderAccount owner field (Customer/SHQ), consolidate ClickHouse into SHQ account, fix admin email | `done` |
 | [p5-017](p5-017.md) | IntegrationType kind (DataPipeline/Provisioning), descriptive names, DataDog Detection Rules provisioning type | `done` |
+| [p5-018](p5-018.md) | ServiceNow provider, SHQ SIR/ITSM account, DataDog→SIR integration type, rename SHQ Data Warehouse | `done` |
