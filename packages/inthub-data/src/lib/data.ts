@@ -532,7 +532,7 @@ export const database: Database = {
     // Data Pipelines
     {
       id: 'it-qualys-clickhouse-v1',
-      name: 'Exposures Qualys → SHQ Data Warehouse v1',
+      name: 'Qualys Exposures → SHQ Data Warehouse v1',
       kind: IntegrationTypeKind.DataPipeline,
       sourceProviderId: 'qualys',
       targetProviderId: 'clickhouse',
@@ -545,7 +545,7 @@ export const database: Database = {
     },
     {
       id: 'it-qualys-clickhouse-v2',
-      name: 'Exposures Qualys → SHQ Data Warehouse v2',
+      name: 'Qualys Exposures → SHQ Data Warehouse v2',
       kind: IntegrationTypeKind.DataPipeline,
       sourceProviderId: 'qualys',
       targetProviderId: 'clickhouse',
@@ -571,7 +571,7 @@ export const database: Database = {
     },
     {
       id: 'it-tenable-clickhouse-v1',
-      name: 'Exposures Tenable → SHQ Data Warehouse',
+      name: 'Tenable Exposures → SHQ Data Warehouse',
       kind: IntegrationTypeKind.DataPipeline,
       sourceProviderId: 'tenable',
       targetProviderId: 'clickhouse',
@@ -584,7 +584,7 @@ export const database: Database = {
     },
     {
       id: 'it-sentinel-clickhouse-v1',
-      name: 'Alerts Sentinel → SHQ Data Warehouse',
+      name: 'Sentinel Alerts → SHQ Data Warehouse',
       kind: IntegrationTypeKind.DataPipeline,
       sourceProviderId: 'sentinel',
       targetProviderId: 'clickhouse',
@@ -597,11 +597,11 @@ export const database: Database = {
     },
     {
       id: 'it-aws-asset-mgmt-v1',
-      name: 'AWS Assets → SHQ Response Assets',
+      name: 'AWS Assets → SHQ Response',
       kind: IntegrationTypeKind.DataPipeline,
       sourceProviderId: 'aws',
       targetProviderId: 'shq-response',
-      runtimeId: 'rt-astronomer-prod',
+      runtimeId: 'rt-eks-prod',
       version: '1.0.0',
       dagId: 'aws_assets_to_shq_v1',
       status: IntegrationTypeStatus.Active,
