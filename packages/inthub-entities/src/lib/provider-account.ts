@@ -4,6 +4,11 @@ export enum ProviderAccountStatus {
   Suspended = 'Suspended',
 }
 
+export enum ProviderAccountOwner {
+  Customer = 'Customer',
+  SHQ = 'SHQ',
+}
+
 export interface ProviderAccount {
   id: string;
   orgId: string;
@@ -11,5 +16,6 @@ export interface ProviderAccount {
   name: string;
   externalId: string;
   status: ProviderAccountStatus;
+  owner: ProviderAccountOwner;
   region?: string;
 }

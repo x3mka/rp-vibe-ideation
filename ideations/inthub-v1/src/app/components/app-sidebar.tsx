@@ -163,7 +163,7 @@ interface User {
 
 const mockUser: User = {
   name: 'Admin User',
-  email: 'admin@inthub.io',
+  email: 'admin@securityhq.com',
   avatar: '',
 };
 

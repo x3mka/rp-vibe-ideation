@@ -3,6 +3,7 @@ import {
   ProviderCategory,
   OrgStatus,
   ProviderAccountStatus,
+  ProviderAccountOwner,
   CredentialStatus,
   ConfigPurpose,
   ConfigStatus,
@@ -97,10 +98,26 @@ export const database: Database = {
       status: OrgStatus.Active,
       createdAt: '2024-06-01T00:00:00Z',
     },
+    {
+      id: 'org-shq',
+      name: 'SecurityHQ',
+      status: OrgStatus.Active,
+      createdAt: '2020-01-01T00:00:00Z',
+    },
   ],
 
   // ── Provider Accounts ────────────────────────────────────────────────────
   providerAccounts: [
+    // SecurityHQ (shared infrastructure)
+    {
+      id: 'pa-shq-clickhouse',
+      orgId: 'org-shq',
+      providerId: 'clickhouse',
+      name: 'SHQ ClickHouse',
+      externalId: 'ch.securityhq.com',
+      status: ProviderAccountStatus.Active,
+      owner: ProviderAccountOwner.SHQ,
+    },
     // Acme Corp
     {
       id: 'pa-acme-aws',
@@ -109,6 +126,7 @@ export const database: Database = {
       name: 'Acme AWS Production',
       externalId: '123456789012',
       status: ProviderAccountStatus.Active,
+      owner: ProviderAccountOwner.Customer,
       region: 'us-east-1',
     },
     {
@@ -118,6 +136,7 @@ export const database: Database = {
       name: 'Acme Qualys',
       externalId: 'acme-qualys-tenant',
       status: ProviderAccountStatus.Active,
+      owner: ProviderAccountOwner.Customer,
     },
     {
       id: 'pa-acme-datadog',
@@ -126,14 +145,7 @@ export const database: Database = {
       name: 'Acme DataDog',
       externalId: 'acme-dd-org',
       status: ProviderAccountStatus.Active,
-    },
-    {
-      id: 'pa-acme-clickhouse',
-      orgId: 'org-acme',
-      providerId: 'clickhouse',
-      name: 'Acme ClickHouse',
-      externalId: 'acme-ch.securityhq.com',
-      status: ProviderAccountStatus.Active,
+      owner: ProviderAccountOwner.Customer,
     },
     {
       id: 'pa-acme-sentinel',
@@ -142,6 +154,7 @@ export const database: Database = {
       name: 'Acme Sentinel',
       externalId: 'acme-sentinel-workspace',
       status: ProviderAccountStatus.Active,
+      owner: ProviderAccountOwner.Customer,
     },
     // Titan Security
     {
@@ -151,6 +164,7 @@ export const database: Database = {
       name: 'Titan AWS',
       externalId: '987654321098',
       status: ProviderAccountStatus.Active,
+      owner: ProviderAccountOwner.Customer,
       region: 'eu-west-1',
     },
     {
@@ -160,14 +174,7 @@ export const database: Database = {
       name: 'Titan Tenable.io',
       externalId: 'titan-tenable-io',
       status: ProviderAccountStatus.Active,
-    },
-    {
-      id: 'pa-titan-clickhouse',
-      orgId: 'org-titan',
-      providerId: 'clickhouse',
-      name: 'Titan ClickHouse',
-      externalId: 'titan-ch.securityhq.com',
-      status: ProviderAccountStatus.Active,
+      owner: ProviderAccountOwner.Customer,
     },
     {
       id: 'pa-titan-qradar',
@@ -176,6 +183,7 @@ export const database: Database = {
       name: 'Titan QRadar',
       externalId: 'titan-qradar-on-cloud',
       status: ProviderAccountStatus.Inactive,
+      owner: ProviderAccountOwner.Customer,
     },
     // Vertex Labs
     {
@@ -185,6 +193,7 @@ export const database: Database = {
       name: 'Vertex AWS Dev',
       externalId: '111222333444',
       status: ProviderAccountStatus.Active,
+      owner: ProviderAccountOwner.Customer,
       region: 'us-west-2',
     },
     {
@@ -194,14 +203,7 @@ export const database: Database = {
       name: 'Vertex Qualys',
       externalId: 'vertex-qualys-trial',
       status: ProviderAccountStatus.Active,
-    },
-    {
-      id: 'pa-vertex-clickhouse',
-      orgId: 'org-vertex',
-      providerId: 'clickhouse',
-      name: 'Vertex ClickHouse',
-      externalId: 'vertex-ch.securityhq.com',
-      status: ProviderAccountStatus.Active,
+      owner: ProviderAccountOwner.Customer,
     },
   ],
 
@@ -297,15 +299,6 @@ export const database: Database = {
       status: CredentialStatus.Active,
       rotatedAt: '2025-10-01T00:00:00Z',
     },
-    {
-      id: 'cred-acme-clickhouse',
-      providerAccountId: 'pa-acme-clickhouse',
-      credentialTypeId: 'ct-clickhouse-user',
-      name: 'Acme ClickHouse User',
-      vaultPath: 'secret/acme/clickhouse/user',
-      status: CredentialStatus.Active,
-      rotatedAt: '2025-11-01T00:00:00Z',
-    },
     // Titan
     {
       id: 'cred-titan-aws-role',
@@ -323,15 +316,6 @@ export const database: Database = {
       credentialTypeId: 'ct-tenable-api-key',
       name: 'Titan Tenable API',
       vaultPath: 'secret/titan/tenable/api',
-      status: CredentialStatus.Active,
-      rotatedAt: '2025-11-01T00:00:00Z',
-    },
-    {
-      id: 'cred-titan-clickhouse',
-      providerAccountId: 'pa-titan-clickhouse',
-      credentialTypeId: 'ct-clickhouse-user',
-      name: 'Titan ClickHouse User',
-      vaultPath: 'secret/titan/clickhouse/user',
       status: CredentialStatus.Active,
       rotatedAt: '2025-11-01T00:00:00Z',
     },
@@ -354,12 +338,13 @@ export const database: Database = {
       status: CredentialStatus.Active,
       rotatedAt: '2025-10-15T00:00:00Z',
     },
+    // SecurityHQ
     {
-      id: 'cred-vertex-clickhouse',
-      providerAccountId: 'pa-vertex-clickhouse',
+      id: 'cred-shq-clickhouse',
+      providerAccountId: 'pa-shq-clickhouse',
       credentialTypeId: 'ct-clickhouse-user',
-      name: 'Vertex ClickHouse User',
-      vaultPath: 'secret/vertex/clickhouse/user',
+      name: 'SHQ ClickHouse User',
+      vaultPath: 'secret/shq/clickhouse/user',
       status: CredentialStatus.Active,
       rotatedAt: '2025-11-01T00:00:00Z',
     },
@@ -441,26 +426,12 @@ export const database: Database = {
       values: { site: 'datadoghq.com', lookbackDays: 14 },
       status: ConfigStatus.Active,
     },
-    {
-      id: 'cfg-acme-clickhouse',
-      providerAccountId: 'pa-acme-clickhouse',
-      configSchemaId: 'cs-clickhouse-integration',
-      values: { database: 'security', table: 'findings', batchSize: 20000 },
-      status: ConfigStatus.Active,
-    },
     // Titan
     {
       id: 'cfg-titan-tenable',
       providerAccountId: 'pa-titan-tenable',
       configSchemaId: 'cs-tenable-integration',
       values: { chunkSize: 1000 },
-      status: ConfigStatus.Active,
-    },
-    {
-      id: 'cfg-titan-clickhouse',
-      providerAccountId: 'pa-titan-clickhouse',
-      configSchemaId: 'cs-clickhouse-integration',
-      values: { database: 'security', table: 'findings' },
       status: ConfigStatus.Active,
     },
     // Vertex
@@ -471,12 +442,13 @@ export const database: Database = {
       values: { domain: 'qualysguard.vertexlabs.io' },
       status: ConfigStatus.Draft,
     },
+    // SecurityHQ
     {
-      id: 'cfg-vertex-clickhouse',
-      providerAccountId: 'pa-vertex-clickhouse',
+      id: 'cfg-shq-clickhouse',
+      providerAccountId: 'pa-shq-clickhouse',
       configSchemaId: 'cs-clickhouse-integration',
-      values: { database: 'security', table: 'findings' },
-      status: ConfigStatus.Draft,
+      values: { database: 'security', table: 'findings', batchSize: 20000 },
+      status: ConfigStatus.Active,
     },
   ],
 
@@ -570,9 +542,9 @@ export const database: Database = {
       orgId: 'org-acme',
       integrationTypeId: 'it-qualys-clickhouse-v2',
       sourceAccountId: 'pa-acme-qualys',
-      targetAccountId: 'pa-acme-clickhouse',
+      targetAccountId: 'pa-shq-clickhouse',
       sourceCredentialId: 'cred-acme-qualys',
-      targetCredentialId: 'cred-acme-clickhouse',
+      targetCredentialId: 'cred-shq-clickhouse',
       name: 'Acme Qualys → ClickHouse',
       status: IntegrationStatus.Active,
       createdAt: '2022-06-01T00:00:00Z',
@@ -583,9 +555,9 @@ export const database: Database = {
       orgId: 'org-acme',
       integrationTypeId: 'it-datadog-clickhouse-v1',
       sourceAccountId: 'pa-acme-datadog',
-      targetAccountId: 'pa-acme-clickhouse',
+      targetAccountId: 'pa-shq-clickhouse',
       sourceCredentialId: 'cred-acme-datadog',
-      targetCredentialId: 'cred-acme-clickhouse',
+      targetCredentialId: 'cred-shq-clickhouse',
       name: 'Acme DataDog → ClickHouse',
       status: IntegrationStatus.Active,
       createdAt: '2022-09-01T00:00:00Z',
@@ -597,9 +569,9 @@ export const database: Database = {
       orgId: 'org-titan',
       integrationTypeId: 'it-tenable-clickhouse-v1',
       sourceAccountId: 'pa-titan-tenable',
-      targetAccountId: 'pa-titan-clickhouse',
+      targetAccountId: 'pa-shq-clickhouse',
       sourceCredentialId: 'cred-titan-tenable',
-      targetCredentialId: 'cred-titan-clickhouse',
+      targetCredentialId: 'cred-shq-clickhouse',
       name: 'Titan Tenable → ClickHouse',
       status: IntegrationStatus.Active,
       createdAt: '2023-04-01T00:00:00Z',
@@ -610,9 +582,9 @@ export const database: Database = {
       orgId: 'org-titan',
       integrationTypeId: 'it-qualys-clickhouse-v1',
       sourceAccountId: 'pa-titan-tenable',
-      targetAccountId: 'pa-titan-clickhouse',
+      targetAccountId: 'pa-shq-clickhouse',
       sourceCredentialId: 'cred-titan-tenable',
-      targetCredentialId: 'cred-titan-clickhouse',
+      targetCredentialId: 'cred-shq-clickhouse',
       name: 'Titan Tenable → ClickHouse (v1 legacy)',
       status: IntegrationStatus.Paused,
       createdAt: '2023-01-20T00:00:00Z',
@@ -624,9 +596,9 @@ export const database: Database = {
       orgId: 'org-vertex',
       integrationTypeId: 'it-qualys-clickhouse-v2',
       sourceAccountId: 'pa-vertex-qualys',
-      targetAccountId: 'pa-vertex-clickhouse',
+      targetAccountId: 'pa-shq-clickhouse',
       sourceCredentialId: 'cred-vertex-qualys',
-      targetCredentialId: 'cred-vertex-clickhouse',
+      targetCredentialId: 'cred-shq-clickhouse',
       name: 'Vertex Qualys → ClickHouse',
       status: IntegrationStatus.Paused,
       createdAt: '2024-07-01T00:00:00Z',
@@ -656,22 +628,14 @@ export const database: Database = {
       completedAt: '2023-01-15T00:02:00Z',
     },
     {
-      id: 'prov-titan-clickhouse-table',
-      providerAccountId: 'pa-titan-clickhouse',
-      name: 'Titan ClickHouse Table Setup',
+      id: 'prov-shq-clickhouse-table',
+      providerAccountId: 'pa-shq-clickhouse',
+      name: 'SHQ ClickHouse Table Setup',
       status: ProvisioningStatus.Succeeded,
       resourceType: 'table',
       resourceId: 'security.findings',
-      createdAt: '2023-02-01T00:00:00Z',
-      completedAt: '2023-02-01T00:01:00Z',
-    },
-    {
-      id: 'prov-vertex-clickhouse-table',
-      providerAccountId: 'pa-vertex-clickhouse',
-      name: 'Vertex ClickHouse Table Setup',
-      status: ProvisioningStatus.Pending,
-      resourceType: 'table',
-      createdAt: '2024-07-05T00:00:00Z',
+      createdAt: '2023-01-01T00:00:00Z',
+      completedAt: '2023-01-01T00:01:00Z',
     },
   ],
 
@@ -905,14 +869,14 @@ export const database: Database = {
       lastRunAt: '2026-04-07T06:00:00Z',
       nextRunAt: '2026-04-08T06:00:00Z',
     },
-    // Vertex provisioning
+    // SHQ provisioning
     {
-      id: 'st-vertex-prov-ch',
-      orgId: 'org-vertex',
+      id: 'st-shq-prov-ch',
+      orgId: 'org-shq',
       type: TaskType.Provisioning,
-      targetId: 'prov-vertex-clickhouse-table',
+      targetId: 'prov-shq-clickhouse-table',
       schedule: '0 0 * * 1',
-      status: TaskStatus.Paused,
+      status: TaskStatus.Active,
     },
   ],
 };
