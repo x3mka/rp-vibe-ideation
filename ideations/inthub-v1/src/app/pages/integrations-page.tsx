@@ -54,11 +54,21 @@ export function IntegrationsPage({
           {integrations.map((intg) => {
             const org = api.getOrg(intg.orgId);
             const intType = api.getIntegrationType(intg.integrationTypeId);
+            const runtime = intType
+              ? database.integrationRuntimes.find((r) => r.id === intType.runtimeId)?.name ?? '—'
+              : '—';
             return (
               <TableRow key={intg.id}>
                 <TableCell className="font-medium">{intg.name}</TableCell>
                 <TableCell>{org?.name ?? '—'}</TableCell>
-                <TableCell>{intType?.name ?? '—'}</TableCell>
+                <TableCell>
+                  <span className="font-medium">{intType?.name ?? '—'}</span>
+                  {intType && (
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      {intType.kind} · {runtime}
+                    </div>
+                  )}
+                </TableCell>
                 <TableCell>
                   <Badge variant={integrationStatusVariant(intg.status)}>{intg.status}</Badge>
                 </TableCell>

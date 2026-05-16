@@ -65,15 +65,25 @@ const navDictionaries: NavItem[] = [
 
 // --- OrgSwitcher ---
 
+interface OrgItem {
+  id: string;
+  name: string;
+  isMssp: boolean;
+}
+
 interface OrgSwitcherProps {
-  orgs: { id: string; name: string }[];
+  orgs: OrgItem[];
   selectedOrgId: string | null;
   onOrgChange: (orgId: string | null) => void;
 }
 
+function orgLabel(org: OrgItem): string {
+  return org.isMssp ? `${org.name} (MSSP)` : org.name;
+}
+
 function OrgSwitcher({ orgs, selectedOrgId, onOrgChange }: OrgSwitcherProps): ReactElement {
   const selectedOrg = orgs.find((o) => o.id === selectedOrgId);
-  const label = selectedOrg?.name ?? 'All Orgs';
+  const label = selectedOrg ? orgLabel(selectedOrg) : 'All Orgs';
 
   return (
     <SidebarMenu>
@@ -112,7 +122,7 @@ function OrgSwitcher({ orgs, selectedOrgId, onOrgChange }: OrgSwitcherProps): Re
                 <Check
                   className={`size-4 ${selectedOrgId === org.id ? 'opacity-100' : 'opacity-0'}`}
                 />
-                {org.name}
+                {orgLabel(org)}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
@@ -254,7 +264,9 @@ export function AppSidebar({
   onOrgChange,
   ...props
 }: AppSidebarProps): ReactElement {
-  const orgs = database.orgs.map((o) => ({ id: o.id, name: o.name }));
+  const orgs = [...database.orgs]
+    .sort((a, b) => (b.isMssp ? 1 : 0) - (a.isMssp ? 1 : 0))
+    .map((o) => ({ id: o.id, name: o.name, isMssp: o.isMssp ?? false }));
 
   return (
     <Sidebar collapsible="icon" {...props}>

@@ -50,8 +50,8 @@ export function ProviderAccountsPage({
             <TableHead>Org</TableHead>
             <TableHead>Provider</TableHead>
             <TableHead>External ID</TableHead>
+            <TableHead>Config</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Region</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -62,10 +62,14 @@ export function ProviderAccountsPage({
               <TableCell>{api.getOrg(pa.orgId)?.name ?? '—'}</TableCell>
               <TableCell>{api.getProvider(pa.providerId)?.name ?? '—'}</TableCell>
               <TableCell className="text-muted-foreground text-xs font-mono">{pa.externalId}</TableCell>
+              <TableCell className="text-muted-foreground text-xs font-mono">
+                {pa.config
+                  ? Object.entries(pa.config).map(([k, v]) => `${k}: ${String(v)}`).join(', ')
+                  : '—'}
+              </TableCell>
               <TableCell>
                 <Badge variant={accountStatusVariant(pa.status)}>{pa.status}</Badge>
               </TableCell>
-              <TableCell className="text-muted-foreground">{pa.region ?? '—'}</TableCell>
             </TableRow>
           ))}
         </TableBody>

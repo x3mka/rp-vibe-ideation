@@ -28,6 +28,7 @@ export const database: Database = {
       name: 'AWS',
       category: ProviderCategory.Cloud,
       description: 'Amazon Web Services cloud platform',
+      configSchema: { default_region: { type: 'string', description: 'Default AWS region (e.g. us-east-1)' } },
     },
     {
       id: 'gcp',
@@ -64,6 +65,7 @@ export const database: Database = {
       name: 'QRadar',
       category: ProviderCategory.SIEM,
       description: 'IBM SIEM platform',
+      configSchema: { url: { type: 'string', description: 'QRadar console URL' } },
     },
     {
       id: 'clickhouse',
@@ -82,6 +84,12 @@ export const database: Database = {
       name: 'ServiceNow',
       category: ProviderCategory.ITSM,
       description: 'IT service management and security incident response platform',
+    },
+    {
+      id: 'shq-response',
+      name: 'SHQ Response',
+      category: ProviderCategory.Platform,
+      description: 'SHQ internal response, asset management, and orchestration platform',
     },
   ],
 
@@ -110,6 +118,7 @@ export const database: Database = {
       name: 'SecurityHQ',
       status: OrgStatus.Active,
       createdAt: '2020-01-01T00:00:00Z',
+      isMssp: true,
     },
   ],
 
@@ -134,6 +143,35 @@ export const database: Database = {
       status: ProviderAccountStatus.Active,
       owner: ProviderAccountOwner.SHQ,
     },
+    {
+      id: 'pa-shq-qradar-1',
+      orgId: 'org-shq',
+      providerId: 'qradar',
+      name: 'SHQ QRadar Console 1',
+      externalId: 'qradar-console1.securityhq.com',
+      status: ProviderAccountStatus.Active,
+      owner: ProviderAccountOwner.SHQ,
+      config: { url: 'https://qradar-console1.securityhq.com' },
+    },
+    {
+      id: 'pa-shq-qradar-2',
+      orgId: 'org-shq',
+      providerId: 'qradar',
+      name: 'SHQ QRadar Console 2',
+      externalId: 'qradar-console2.securityhq.com',
+      status: ProviderAccountStatus.Active,
+      owner: ProviderAccountOwner.SHQ,
+      config: { url: 'https://qradar-console2.securityhq.com' },
+    },
+    {
+      id: 'pa-shq-asset-mgmt',
+      orgId: 'org-shq',
+      providerId: 'shq-response',
+      name: 'SHQ Asset Management',
+      externalId: 'asset-mgmt.securityhq.com',
+      status: ProviderAccountStatus.Active,
+      owner: ProviderAccountOwner.SHQ,
+    },
     // Acme Corp
     {
       id: 'pa-acme-aws',
@@ -143,7 +181,7 @@ export const database: Database = {
       externalId: '123456789012',
       status: ProviderAccountStatus.Active,
       owner: ProviderAccountOwner.Customer,
-      region: 'us-east-1',
+      config: { default_region: 'us-east-1' },
     },
     {
       id: 'pa-acme-qualys',
@@ -181,7 +219,7 @@ export const database: Database = {
       externalId: '987654321098',
       status: ProviderAccountStatus.Active,
       owner: ProviderAccountOwner.Customer,
-      region: 'eu-west-1',
+      config: { default_region: 'eu-west-1' },
     },
     {
       id: 'pa-titan-tenable',
@@ -200,6 +238,7 @@ export const database: Database = {
       externalId: 'titan-qradar-on-cloud',
       status: ProviderAccountStatus.Inactive,
       owner: ProviderAccountOwner.Customer,
+      config: { url: 'https://qradar-console1.securityhq.com' },
     },
     // Vertex Labs
     {
@@ -210,7 +249,7 @@ export const database: Database = {
       externalId: '111222333444',
       status: ProviderAccountStatus.Active,
       owner: ProviderAccountOwner.Customer,
-      region: 'us-west-2',
+      config: { default_region: 'us-west-2' },
     },
     {
       id: 'pa-vertex-qualys',
@@ -571,6 +610,18 @@ export const database: Database = {
       status: IntegrationTypeStatus.Draft,
       description: 'Forwards Microsoft Sentinel alerts into ClickHouse',
     },
+    {
+      id: 'it-aws-asset-mgmt-v1',
+      name: 'AWS Assets → SHQ Asset Management',
+      kind: IntegrationTypeKind.DataPipeline,
+      sourceProviderId: 'aws',
+      targetProviderId: 'shq-response',
+      runtimeId: 'rt-astronomer-prod',
+      version: '1.0.0',
+      dagId: 'aws_assets_to_shq_v1',
+      status: IntegrationTypeStatus.Active,
+      description: 'AWS cloud assets discovery using AWS Resource Explorer into SHQ Asset Management',
+    },
     // Provisioning
     {
       id: 'it-datadog-detection-rules-v1',
@@ -653,6 +704,43 @@ export const database: Database = {
       name: 'Vertex Qualys → ClickHouse',
       status: IntegrationStatus.Paused,
       createdAt: '2024-07-01T00:00:00Z',
+    },
+    // AWS Asset Discovery
+    {
+      id: 'int-acme-aws-assets',
+      orgId: 'org-acme',
+      integrationTypeId: 'it-aws-asset-mgmt-v1',
+      sourceAccountId: 'pa-acme-aws',
+      targetAccountId: 'pa-shq-asset-mgmt',
+      sourceCredentialId: 'cred-acme-aws-role',
+      name: 'Acme AWS Asset Discovery',
+      status: IntegrationStatus.Active,
+      createdAt: '2024-03-01T00:00:00Z',
+      lastRunAt: '2026-04-06T05:00:00Z',
+    },
+    {
+      id: 'int-titan-aws-assets',
+      orgId: 'org-titan',
+      integrationTypeId: 'it-aws-asset-mgmt-v1',
+      sourceAccountId: 'pa-titan-aws',
+      targetAccountId: 'pa-shq-asset-mgmt',
+      sourceCredentialId: 'cred-titan-aws-role',
+      name: 'Titan AWS Asset Discovery',
+      status: IntegrationStatus.Active,
+      createdAt: '2024-03-15T00:00:00Z',
+      lastRunAt: '2026-04-06T05:00:00Z',
+    },
+    {
+      id: 'int-vertex-aws-assets',
+      orgId: 'org-vertex',
+      integrationTypeId: 'it-aws-asset-mgmt-v1',
+      sourceAccountId: 'pa-vertex-aws',
+      targetAccountId: 'pa-shq-asset-mgmt',
+      sourceCredentialId: 'cred-vertex-aws-key',
+      name: 'Vertex AWS Asset Discovery',
+      status: IntegrationStatus.Active,
+      createdAt: '2024-07-10T00:00:00Z',
+      lastRunAt: '2026-04-06T05:00:00Z',
     },
     // Provisioning
     {

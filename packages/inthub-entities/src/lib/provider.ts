@@ -6,6 +6,7 @@ export enum ProviderCategory {
   ITSM = 'ITSM',
   Identity = 'Identity',
   Network = 'Network',
+  Platform = 'Platform',
   Other = 'Other',
 }
 
@@ -15,4 +16,5 @@ export interface Provider {
   category: ProviderCategory;
   description?: string;
   logoUrl?: string;
+  configSchema?: Record<string, unknown>;
 }

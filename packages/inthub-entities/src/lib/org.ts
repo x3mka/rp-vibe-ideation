@@ -9,4 +9,5 @@ export interface Org {
   name: string;
   status: OrgStatus;
   createdAt: string;
+  isMssp?: boolean;
 }

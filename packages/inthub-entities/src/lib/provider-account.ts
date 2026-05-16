@@ -17,5 +17,5 @@ export interface ProviderAccount {
   externalId: string;
   status: ProviderAccountStatus;
   owner: ProviderAccountOwner;
-  region?: string;
+  config?: Record<string, unknown>;
 }
