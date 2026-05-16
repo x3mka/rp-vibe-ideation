@@ -52,3 +52,4 @@ Mirrors `dashboard-app-1`: collapsible shadcn sidebar (SidebarProvider pattern) 
 | [p5-017](p5-017.md) | IntegrationType kind (DataPipeline/Provisioning), descriptive names, DataDog Detection Rules provisioning type | `done` |
 | [p5-018](p5-018.md) | ServiceNow provider, SHQ SIR/ITSM account, DataDog→SIR integration type, rename SHQ Data Warehouse | `done` |
 | [p5-019](p5-019.md) | MSSP org flag, provider configSchema, account config, SHQ Response + QRadar consoles, AWS asset discovery | `done` |
+| [p5-020](p5-020.md) | Schedule fields, rename SHQ Response Assets, fix Provisioning badge, remove integration name, remove QRadar consoles | `done` |

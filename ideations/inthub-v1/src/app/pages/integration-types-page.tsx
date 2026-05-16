@@ -30,7 +30,7 @@ function statusVariant(status: IntegrationTypeStatus): BadgeProps['variant'] {
 }
 
 function kindVariant(kind: IntegrationTypeKind): BadgeProps['variant'] {
-  return kind === 'Provisioning' ? 'secondary' : 'outline';
+  return kind === 'Provisioning' ? 'default' : 'outline';
 }
 
 export function IntegrationTypesPage(): ReactElement {
@@ -43,6 +43,7 @@ export function IntegrationTypesPage(): ReactElement {
             <TableHead>Name</TableHead>
             <TableHead>Kind</TableHead>
             <TableHead>Description</TableHead>
+            <TableHead>Default Schedule</TableHead>
             <TableHead>Runtime</TableHead>
             <TableHead>Version</TableHead>
             <TableHead>Status</TableHead>
@@ -59,6 +60,7 @@ export function IntegrationTypesPage(): ReactElement {
                   <Badge variant={kindVariant(it.kind)}>{it.kind}</Badge>
                 </TableCell>
                 <TableCell className="text-muted-foreground text-sm">{it.description ?? '—'}</TableCell>
+                <TableCell className="text-muted-foreground font-mono text-xs">{it.defaultSchedule ?? '—'}</TableCell>
                 <TableCell>{runtime}</TableCell>
                 <TableCell className="text-muted-foreground">{it.version}</TableCell>
                 <TableCell>

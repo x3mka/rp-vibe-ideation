@@ -13,8 +13,9 @@ export interface Integration {
   targetAccountId: string;
   sourceCredentialId?: string;
   targetCredentialId?: string;
-  name: string;
+  name?: string;
   status: IntegrationStatus;
+  schedule?: string;
   createdAt: string;
   lastRunAt?: string;
 }

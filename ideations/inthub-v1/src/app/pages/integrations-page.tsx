@@ -43,9 +43,9 @@ export function IntegrationsPage({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
             <TableHead>Org</TableHead>
             <TableHead>Integration Type</TableHead>
+            <TableHead>Schedule</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Last Run</TableHead>
           </TableRow>
@@ -57,9 +57,10 @@ export function IntegrationsPage({
             const runtime = intType
               ? database.integrationRuntimes.find((r) => r.id === intType.runtimeId)?.name ?? '—'
               : '—';
+            const schedule = intg.schedule ?? intType?.defaultSchedule;
+            const scheduleIsDefault = !intg.schedule && !!intType?.defaultSchedule;
             return (
               <TableRow key={intg.id}>
-                <TableCell className="font-medium">{intg.name}</TableCell>
                 <TableCell>{org?.name ?? '—'}</TableCell>
                 <TableCell>
                   <span className="font-medium">{intType?.name ?? '—'}</span>
@@ -68,6 +69,9 @@ export function IntegrationsPage({
                       {intType.kind} · {runtime}
                     </div>
                   )}
+                </TableCell>
+                <TableCell className={`font-mono text-xs${scheduleIsDefault ? ' text-muted-foreground' : ''}`}>
+                  {schedule ?? '—'}
                 </TableCell>
                 <TableCell>
                   <Badge variant={integrationStatusVariant(intg.status)}>{intg.status}</Badge>

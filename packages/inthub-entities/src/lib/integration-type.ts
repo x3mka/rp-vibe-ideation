@@ -20,4 +20,5 @@ export interface IntegrationType {
   dagId?: string;
   status: IntegrationTypeStatus;
   description?: string;
+  defaultSchedule?: string;
 }
