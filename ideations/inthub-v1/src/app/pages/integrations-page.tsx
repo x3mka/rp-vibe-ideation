@@ -30,6 +30,19 @@ function integrationStatusVariant(status: IntegrationStatus): BadgeProps['varian
   }
 }
 
+function describeCron(cron: string): string {
+  const parts = cron.split(' ');
+  if (parts.length !== 5) return '';
+  const [minute, hour, , , weekday] = parts;
+  if (minute.startsWith('*/')) return `Every ${minute.slice(2)} min`;
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  if (minute === '0' && hour !== '*' && weekday !== '*')
+    return `Weekly ${days[parseInt(weekday, 10)]} at ${hour.padStart(2, '0')}:00`;
+  if (minute === '0' && hour !== '*')
+    return `Daily at ${hour.padStart(2, '0')}:00`;
+  return '';
+}
+
 export function IntegrationsPage({
   selectedOrgId,
 }: {
@@ -45,6 +58,7 @@ export function IntegrationsPage({
           <TableRow>
             <TableHead>Org</TableHead>
             <TableHead>Integration Type</TableHead>
+            <TableHead>Accounts</TableHead>
             <TableHead>Schedule</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Last Run</TableHead>
@@ -57,6 +71,10 @@ export function IntegrationsPage({
             const runtime = intType
               ? database.integrationRuntimes.find((r) => r.id === intType.runtimeId)?.name ?? '—'
               : '—';
+            const sourceAccount = intg.sourceAccountId
+              ? api.getProviderAccount(intg.sourceAccountId)
+              : null;
+            const targetAccount = api.getProviderAccount(intg.targetAccountId);
             const schedule = intg.schedule ?? intType?.defaultSchedule;
             const scheduleIsDefault = !intg.schedule && !!intType?.defaultSchedule;
             return (
@@ -70,8 +88,23 @@ export function IntegrationsPage({
                     </div>
                   )}
                 </TableCell>
+                <TableCell className="text-sm">
+                  {sourceAccount && (
+                    <div>{sourceAccount.name}</div>
+                  )}
+                  <div className={sourceAccount ? 'text-muted-foreground' : undefined}>
+                    {sourceAccount ? '→ ' : ''}{targetAccount?.name ?? '—'}
+                  </div>
+                </TableCell>
                 <TableCell className={`font-mono text-xs${scheduleIsDefault ? ' text-muted-foreground' : ''}`}>
-                  {schedule ?? '—'}
+                  {schedule ? (
+                    <>
+                      {schedule}
+                      {describeCron(schedule) && (
+                        <div className="font-sans text-muted-foreground mt-0.5">{describeCron(schedule)}</div>
+                      )}
+                    </>
+                  ) : '—'}
                 </TableCell>
                 <TableCell>
                   <Badge variant={integrationStatusVariant(intg.status)}>{intg.status}</Badge>

@@ -391,6 +391,15 @@ export const database: Database = {
       rotatedAt: '2025-11-01T00:00:00Z',
     },
     {
+      id: 'cred-acme-sentinel',
+      providerAccountId: 'pa-acme-sentinel',
+      credentialTypeId: 'ct-sentinel-api',
+      name: 'Acme Sentinel API',
+      vaultPath: 'secret/acme/sentinel/api',
+      status: CredentialStatus.Active,
+      rotatedAt: '2025-09-01T00:00:00Z',
+    },
+    {
       id: 'cred-shq-servicenow',
       providerAccountId: 'pa-shq-servicenow',
       credentialTypeId: 'ct-servicenow-api',
@@ -610,6 +619,17 @@ export const database: Database = {
     },
     // Provisioning
     {
+      id: 'it-sentinel-detection-rules-v1',
+      name: 'Sentinel Detection Rules',
+      kind: IntegrationTypeKind.Provisioning,
+      targetProviderId: 'sentinel',
+      runtimeId: 'rt-n8n-prod',
+      version: '1.0.0',
+      status: IntegrationTypeStatus.Active,
+      description: 'Provisions SHQ-managed detection rules into a Microsoft Sentinel workspace',
+      defaultSchedule: '0 0 * * 1',
+    },
+    {
       id: 'it-datadog-detection-rules-v1',
       name: 'DataDog Detection Rules',
       kind: IntegrationTypeKind.Provisioning,
@@ -725,6 +745,16 @@ export const database: Database = {
       lastRunAt: '2026-04-06T05:00:00Z',
     },
     // Provisioning
+    {
+      id: 'int-acme-sentinel-rules',
+      orgId: 'org-acme',
+      integrationTypeId: 'it-sentinel-detection-rules-v1',
+      targetAccountId: 'pa-acme-sentinel',
+      targetCredentialId: 'cred-acme-sentinel',
+      status: IntegrationStatus.Active,
+      createdAt: '2024-06-01T00:00:00Z',
+      lastRunAt: '2026-04-07T00:00:00Z',
+    },
     {
       id: 'int-acme-dd-rules',
       orgId: 'org-acme',
