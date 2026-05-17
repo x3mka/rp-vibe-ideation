@@ -72,7 +72,7 @@ export function IntegrationsPage({
               ? database.integrationRuntimes.find((r) => r.id === intType.runtimeId)?.name ?? '—'
               : '—';
             const account = intg.accountId
-              ? api.getProviderAccount(intg.accountId)
+              ? api.getAccount(intg.accountId)
               : null;
             const schedule = intg.schedule ?? intType?.defaultSchedule;
             const scheduleIsDefault = !intg.schedule && !!intType?.defaultSchedule;

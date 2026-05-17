@@ -1,19 +1,19 @@
-import type { Database, ProviderAccount } from '@rp-vibe-ideation/inthub-entities';
+import type { Database, Account } from '@rp-vibe-ideation/inthub-entities';
 
-export interface ProviderAccountFilter {
+export interface AccountFilter {
   orgId?: string;
   providerId?: string;
 }
 
-export interface ProviderAccountsApi {
-  getProviderAccounts(filter?: ProviderAccountFilter): ProviderAccount[];
-  getProviderAccount(id: string): ProviderAccount | undefined;
+export interface AccountsApi {
+  getAccounts(filter?: AccountFilter): Account[];
+  getAccount(id: string): Account | undefined;
 }
 
-export function makeProviderAccountsApi(db: Database): ProviderAccountsApi {
+export function makeAccountsApi(db: Database): AccountsApi {
   return {
-    getProviderAccounts(filter?: ProviderAccountFilter): ProviderAccount[] {
-      let accounts = db.providerAccounts;
+    getAccounts(filter?: AccountFilter): Account[] {
+      let accounts = db.accounts;
       if (filter?.orgId !== undefined) {
         accounts = accounts.filter((a) => a.orgId === filter.orgId);
       }
@@ -23,8 +23,8 @@ export function makeProviderAccountsApi(db: Database): ProviderAccountsApi {
       return accounts;
     },
 
-    getProviderAccount(id: string): ProviderAccount | undefined {
-      return db.providerAccounts.find((a) => a.id === id);
+    getAccount(id: string): Account | undefined {
+      return db.accounts.find((a) => a.id === id);
     },
   };
 }

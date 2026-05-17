@@ -51,7 +51,7 @@ interface NavItem {
 }
 
 const navMain: NavItem[] = [
-  { title: 'Provider Accounts', icon: Server, view: 'provider-accounts' },
+  { title: 'Accounts', icon: Server, view: 'accounts' },
   { title: 'Credentials', icon: KeyRound, view: 'credentials' },
   { title: 'Integrations', icon: ArrowLeftRight, view: 'integrations' },
 ];

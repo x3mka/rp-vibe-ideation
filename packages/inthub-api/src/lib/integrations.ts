@@ -1,4 +1,4 @@
-import type { Database, Integration, ProviderAccount } from '@rp-vibe-ideation/inthub-entities';
+import type { Database, Integration, Account } from '@rp-vibe-ideation/inthub-entities';
 
 export interface IntegrationFilter {
   orgId?: string;
@@ -6,7 +6,7 @@ export interface IntegrationFilter {
 }
 
 export interface IntegrationGraph {
-  nodes: ProviderAccount[];
+  nodes: Account[];
   edges: Integration[];
 }
 
@@ -41,7 +41,7 @@ export function makeIntegrationsApi(db: Database): IntegrationsApi {
       for (const integration of orgIntegrations) {
         if (integration.accountId) accountIds.add(integration.accountId);
       }
-      const nodes = db.providerAccounts.filter((a) => accountIds.has(a.id));
+      const nodes = db.accounts.filter((a) => accountIds.has(a.id));
       return { nodes, edges: orgIntegrations };
     },
   };

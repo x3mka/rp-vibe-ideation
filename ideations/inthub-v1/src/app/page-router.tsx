@@ -3,7 +3,7 @@ import { ProvidersPage } from '@/app/pages/providers-page';
 import { CredentialTypesPage } from '@/app/pages/credential-types-page';
 import { IntegrationTypesPage } from '@/app/pages/integration-types-page';
 import { IntegrationRuntimesPage } from '@/app/pages/integration-runtimes-page';
-import { ProviderAccountsPage } from '@/app/pages/provider-accounts-page';
+import { AccountsPage } from '@/app/pages/provider-accounts-page';
 import { CredentialsPage } from '@/app/pages/credentials-page';
 import { IntegrationsPage } from '@/app/pages/integrations-page';
 
@@ -15,7 +15,7 @@ export function PageRouter({
   selectedOrgId: string | null;
 }): ReactElement {
   const pages: Record<string, ReactElement> = {
-    'provider-accounts': <ProviderAccountsPage selectedOrgId={selectedOrgId} />,
+    'accounts': <AccountsPage selectedOrgId={selectedOrgId} />,
     credentials: <CredentialsPage selectedOrgId={selectedOrgId} />,
     integrations: <IntegrationsPage selectedOrgId={selectedOrgId} />,
     providers: <ProvidersPage />,

@@ -29,7 +29,7 @@ function allExist(refs: string[], pool: Set<string>, label: string): void {
 describe('No duplicate IDs', () => {
   it('providers', () => noDuplicates(db.providers, 'providers'));
   it('orgs', () => noDuplicates(db.orgs, 'orgs'));
-  it('providerAccounts', () => noDuplicates(db.providerAccounts, 'providerAccounts'));
+  it('accounts', () => noDuplicates(db.accounts, 'accounts'));
   it('credentialTypes', () => noDuplicates(db.credentialTypes, 'credentialTypes'));
   it('credentials', () => noDuplicates(db.credentials, 'credentials'));
   it('configSchemas', () => noDuplicates(db.configSchemas, 'configSchemas'));
@@ -49,7 +49,7 @@ describe('No duplicate IDs', () => {
 describe('Foreign key integrity', () => {
   const providerIds = ids(db.providers);
   const orgIds = ids(db.orgs);
-  const providerAccountIds = ids(db.providerAccounts);
+  const providerAccountIds = ids(db.accounts);
   const credentialTypeIds = ids(db.credentialTypes);
   const configSchemaIds = ids(db.configSchemas);
   const integrationTypeIds = ids(db.integrationTypes);
@@ -57,14 +57,14 @@ describe('Foreign key integrity', () => {
   const healthCheckBindingIds = ids(db.healthCheckBindings);
 
   it('ProviderAccount.providerId → providers', () => {
-    allExist(db.providerAccounts.map((a) => a.providerId), providerIds, 'ProviderAccount.providerId');
+    allExist(db.accounts.map((a) => a.providerId), providerIds, 'ProviderAccount.providerId');
   });
 
   it('ProviderAccount.orgId → orgs', () => {
-    allExist(db.providerAccounts.map((a) => a.orgId), orgIds, 'ProviderAccount.orgId');
+    allExist(db.accounts.map((a) => a.orgId), orgIds, 'ProviderAccount.orgId');
   });
 
-  it('Credential.providerAccountId → providerAccounts', () => {
+  it('Credential.providerAccountId → accounts', () => {
     allExist(db.credentials.map((c) => c.providerAccountId), providerAccountIds, 'Credential.providerAccountId');
   });
 
@@ -72,7 +72,7 @@ describe('Foreign key integrity', () => {
     allExist(db.credentials.map((c) => c.credentialTypeId), credentialTypeIds, 'Credential.credentialTypeId');
   });
 
-  it('Config.providerAccountId → providerAccounts', () => {
+  it('Config.providerAccountId → accounts', () => {
     allExist(db.configs.map((c) => c.providerAccountId), providerAccountIds, 'Config.providerAccountId');
   });
 
@@ -88,7 +88,7 @@ describe('Foreign key integrity', () => {
     allExist(db.integrations.map((i) => i.integrationTypeId), integrationTypeIds, 'Integration.integrationTypeId');
   });
 
-  it('Integration.accountId → providerAccounts', () => {
+  it('Integration.accountId → accounts', () => {
     const ids = db.integrations.map((i) => i.accountId).filter((id): id is string => id !== undefined);
     allExist(ids, providerAccountIds, 'Integration.accountId');
   });
@@ -124,7 +124,7 @@ describe('Dataset non-empty requirements', () => {
   it('covers all 15 entity types (non-empty arrays)', () => {
     expect(db.providers.length).toBeGreaterThan(0);
     expect(db.orgs.length).toBeGreaterThan(0);
-    expect(db.providerAccounts.length).toBeGreaterThan(0);
+    expect(db.accounts.length).toBeGreaterThan(0);
     expect(db.credentialTypes.length).toBeGreaterThan(0);
     expect(db.credentials.length).toBeGreaterThan(0);
     expect(db.configSchemas.length).toBeGreaterThan(0);

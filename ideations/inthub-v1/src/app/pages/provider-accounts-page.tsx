@@ -11,15 +11,15 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import type { ProviderAccountStatus, ProviderAccountOwner } from '@rp-vibe-ideation/inthub-entities';
+import type { AccountStatus, AccountOwner } from '@rp-vibe-ideation/inthub-entities';
 
 const api = makeApi(database);
 
-function ownerVariant(owner: ProviderAccountOwner): BadgeProps['variant'] {
+function ownerVariant(owner: AccountOwner): BadgeProps['variant'] {
   return owner === 'SHQ' ? 'default' : 'secondary';
 }
 
-function accountStatusVariant(status: ProviderAccountStatus): BadgeProps['variant'] {
+function accountStatusVariant(status: AccountStatus): BadgeProps['variant'] {
   switch (status) {
     case 'Active':
       return 'default';
@@ -32,16 +32,16 @@ function accountStatusVariant(status: ProviderAccountStatus): BadgeProps['varian
   }
 }
 
-export function ProviderAccountsPage({
+export function AccountsPage({
   selectedOrgId,
 }: {
   selectedOrgId: string | null;
 }): ReactElement {
-  const providerAccounts = api.getProviderAccounts(selectedOrgId ? { orgId: selectedOrgId } : {});
+  const accounts = api.getAccounts(selectedOrgId ? { orgId: selectedOrgId } : {});
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-4">Provider Accounts</h2>
+      <h2 className="text-xl font-semibold mb-4">Accounts</h2>
       <Table>
         <TableHeader>
           <TableRow>
@@ -55,20 +55,20 @@ export function ProviderAccountsPage({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {providerAccounts.map((pa) => (
-            <TableRow key={pa.id}>
-              <TableCell className="font-medium">{pa.name}</TableCell>
-              <TableCell><Badge variant={ownerVariant(pa.owner)}>{pa.owner}</Badge></TableCell>
-              <TableCell>{api.getOrg(pa.orgId)?.name ?? '—'}</TableCell>
-              <TableCell>{api.getProvider(pa.providerId)?.name ?? '—'}</TableCell>
-              <TableCell className="text-muted-foreground text-xs font-mono">{pa.externalId}</TableCell>
+          {accounts.map((acc) => (
+            <TableRow key={acc.id}>
+              <TableCell className="font-medium">{acc.name}</TableCell>
+              <TableCell><Badge variant={ownerVariant(acc.owner)}>{acc.owner}</Badge></TableCell>
+              <TableCell>{api.getOrg(acc.orgId)?.name ?? '—'}</TableCell>
+              <TableCell>{api.getProvider(acc.providerId)?.name ?? '—'}</TableCell>
+              <TableCell className="text-muted-foreground text-xs font-mono">{acc.externalId}</TableCell>
               <TableCell className="text-muted-foreground text-xs font-mono">
-                {pa.config
-                  ? Object.entries(pa.config).map(([k, v]) => `${k}: ${String(v)}`).join(', ')
+                {acc.config
+                  ? Object.entries(acc.config).map(([k, v]) => `${k}: ${String(v)}`).join(', ')
                   : '—'}
               </TableCell>
               <TableCell>
-                <Badge variant={accountStatusVariant(pa.status)}>{pa.status}</Badge>
+                <Badge variant={accountStatusVariant(acc.status)}>{acc.status}</Badge>
               </TableCell>
             </TableRow>
           ))}

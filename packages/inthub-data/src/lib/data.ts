@@ -2,8 +2,8 @@ import type { Database } from '@rp-vibe-ideation/inthub-entities';
 import {
   ProviderCategory,
   OrgStatus,
-  ProviderAccountStatus,
-  ProviderAccountOwner,
+  AccountStatus,
+  AccountOwner,
   CredentialStatus,
   ConfigPurpose,
   ConfigStatus,
@@ -122,8 +122,8 @@ export const database: Database = {
     },
   ],
 
-  // ── Provider Accounts ────────────────────────────────────────────────────
-  providerAccounts: [
+  // ── Accounts ─────────────────────────────────────────────────────────────
+  accounts: [
     // SecurityHQ (shared infrastructure)
     {
       id: 'pa-shq-clickhouse',
@@ -131,8 +131,8 @@ export const database: Database = {
       providerId: 'clickhouse',
       name: 'SHQ Data Warehouse',
       externalId: 'ch.securityhq.com',
-      status: ProviderAccountStatus.Active,
-      owner: ProviderAccountOwner.SHQ,
+      status: AccountStatus.Active,
+      owner: AccountOwner.SHQ,
     },
     {
       id: 'pa-shq-servicenow',
@@ -140,8 +140,8 @@ export const database: Database = {
       providerId: 'servicenow',
       name: 'SHQ SIR/ITSM',
       externalId: 'securityhq.service-now.com',
-      status: ProviderAccountStatus.Active,
-      owner: ProviderAccountOwner.SHQ,
+      status: AccountStatus.Active,
+      owner: AccountOwner.SHQ,
     },
     {
       id: 'pa-shq-asset-mgmt',
@@ -149,8 +149,8 @@ export const database: Database = {
       providerId: 'shq-response',
       name: 'SHQ Response Assets',
       externalId: 'asset-mgmt.securityhq.com',
-      status: ProviderAccountStatus.Active,
-      owner: ProviderAccountOwner.SHQ,
+      status: AccountStatus.Active,
+      owner: AccountOwner.SHQ,
     },
     // Acme Corp
     {
@@ -159,8 +159,8 @@ export const database: Database = {
       providerId: 'aws',
       name: 'Acme AWS Production',
       externalId: '123456789012',
-      status: ProviderAccountStatus.Active,
-      owner: ProviderAccountOwner.Customer,
+      status: AccountStatus.Active,
+      owner: AccountOwner.Customer,
       config: { default_region: 'us-east-1' },
     },
     {
@@ -169,8 +169,8 @@ export const database: Database = {
       providerId: 'qualys',
       name: 'Acme Qualys',
       externalId: 'acme-qualys-tenant',
-      status: ProviderAccountStatus.Active,
-      owner: ProviderAccountOwner.Customer,
+      status: AccountStatus.Active,
+      owner: AccountOwner.Customer,
     },
     {
       id: 'pa-acme-datadog',
@@ -178,8 +178,8 @@ export const database: Database = {
       providerId: 'datadog',
       name: 'Acme DataDog',
       externalId: 'acme-dd-org',
-      status: ProviderAccountStatus.Active,
-      owner: ProviderAccountOwner.Customer,
+      status: AccountStatus.Active,
+      owner: AccountOwner.Customer,
     },
     {
       id: 'pa-acme-sentinel',
@@ -187,8 +187,8 @@ export const database: Database = {
       providerId: 'sentinel',
       name: 'Acme Sentinel',
       externalId: 'acme-sentinel-workspace',
-      status: ProviderAccountStatus.Active,
-      owner: ProviderAccountOwner.Customer,
+      status: AccountStatus.Active,
+      owner: AccountOwner.Customer,
     },
     // Titan Security
     {
@@ -197,8 +197,8 @@ export const database: Database = {
       providerId: 'aws',
       name: 'Titan AWS',
       externalId: '987654321098',
-      status: ProviderAccountStatus.Active,
-      owner: ProviderAccountOwner.Customer,
+      status: AccountStatus.Active,
+      owner: AccountOwner.Customer,
       config: { default_region: 'eu-west-1' },
     },
     {
@@ -207,8 +207,8 @@ export const database: Database = {
       providerId: 'tenable',
       name: 'Titan Tenable.io',
       externalId: 'titan-tenable-io',
-      status: ProviderAccountStatus.Active,
-      owner: ProviderAccountOwner.Customer,
+      status: AccountStatus.Active,
+      owner: AccountOwner.Customer,
     },
     {
       id: 'pa-titan-qradar',
@@ -216,8 +216,8 @@ export const database: Database = {
       providerId: 'qradar',
       name: 'Titan QRadar',
       externalId: 'titan-qradar-on-cloud',
-      status: ProviderAccountStatus.Inactive,
-      owner: ProviderAccountOwner.Customer,
+      status: AccountStatus.Inactive,
+      owner: AccountOwner.Customer,
       config: { url: 'https://qradar-console1.securityhq.com' },
     },
     // Vertex Labs
@@ -227,8 +227,8 @@ export const database: Database = {
       providerId: 'aws',
       name: 'Vertex AWS Dev',
       externalId: '111222333444',
-      status: ProviderAccountStatus.Active,
-      owner: ProviderAccountOwner.Customer,
+      status: AccountStatus.Active,
+      owner: AccountOwner.Customer,
       config: { default_region: 'us-west-2' },
     },
     {
@@ -237,8 +237,8 @@ export const database: Database = {
       providerId: 'qualys',
       name: 'Vertex Qualys',
       externalId: 'vertex-qualys-trial',
-      status: ProviderAccountStatus.Active,
-      owner: ProviderAccountOwner.Customer,
+      status: AccountStatus.Active,
+      owner: AccountOwner.Customer,
     },
   ],
 

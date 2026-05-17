@@ -19,7 +19,7 @@ interface BreadcrumbEntry {
 }
 
 const breadcrumbMap: Record<string, BreadcrumbEntry> = {
-  'provider-accounts': { section: 'Main', label: 'Provider Accounts' },
+  'accounts': { section: 'Main', label: 'Accounts' },
   credentials: { section: 'Main', label: 'Credentials' },
   integrations: { section: 'Main', label: 'Integrations' },
   providers: { section: 'Dictionaries', label: 'Providers' },
@@ -29,7 +29,7 @@ const breadcrumbMap: Record<string, BreadcrumbEntry> = {
 };
 
 export function App(): ReactElement {
-  const [activeView, setActiveView] = useState<string>('provider-accounts');
+  const [activeView, setActiveView] = useState<string>('accounts');
   const [selectedOrgId, setSelectedOrgId] = useState<string | null>(null);
 
   const breadcrumb = breadcrumbMap[activeView] ?? { section: '', label: activeView };

@@ -3,7 +3,7 @@ import type { Database } from '@rp-vibe-ideation/inthub-entities';
 import {
   ProviderCategory,
   OrgStatus,
-  ProviderAccountStatus,
+  AccountStatus,
   CredentialStatus,
   ConfigPurpose,
   ConfigStatus,
@@ -31,10 +31,10 @@ const db: Database = {
     { id: 'o-alpha', name: 'Alpha Corp', status: OrgStatus.Active, createdAt: '2023-01-01T00:00:00Z' },
     { id: 'o-beta', name: 'Beta Inc', status: OrgStatus.Active, createdAt: '2024-01-01T00:00:00Z' },
   ],
-  providerAccounts: [
-    { id: 'pa-alpha-aws', orgId: 'o-alpha', providerId: 'p-aws', name: 'Alpha AWS', externalId: '111', status: ProviderAccountStatus.Active },
-    { id: 'pa-alpha-qualys', orgId: 'o-alpha', providerId: 'p-qualys', name: 'Alpha Qualys', externalId: '222', status: ProviderAccountStatus.Active },
-    { id: 'pa-beta-aws', orgId: 'o-beta', providerId: 'p-aws', name: 'Beta AWS', externalId: '333', status: ProviderAccountStatus.Active },
+  accounts: [
+    { id: 'pa-alpha-aws', orgId: 'o-alpha', providerId: 'p-aws', name: 'Alpha AWS', externalId: '111', status: AccountStatus.Active },
+    { id: 'pa-alpha-qualys', orgId: 'o-alpha', providerId: 'p-qualys', name: 'Alpha Qualys', externalId: '222', status: AccountStatus.Active },
+    { id: 'pa-beta-aws', orgId: 'o-beta', providerId: 'p-aws', name: 'Beta AWS', externalId: '333', status: AccountStatus.Active },
   ],
   credentialTypes: [
     { id: 'ct-aws-key', providerId: 'p-aws', name: 'Access Key', fields: ['accessKeyId', 'secretKey'] },
@@ -123,7 +123,7 @@ const db: Database = {
 const emptyDb: Database = {
   providers: [],
   orgs: [],
-  providerAccounts: [],
+  accounts: [],
   credentialTypes: [],
   credentials: [],
   configSchemas: [],
@@ -145,7 +145,7 @@ describe('makeApi()', () => {
     const api = makeApi(db);
     expect(typeof api.getProviders).toBe('function');
     expect(typeof api.getOrgs).toBe('function');
-    expect(typeof api.getProviderAccounts).toBe('function');
+    expect(typeof api.getAccounts).toBe('function');
     expect(typeof api.getCredentials).toBe('function');
     expect(typeof api.getIntegrations).toBe('function');
     expect(typeof api.getIntegrationGraph).toBe('function');
@@ -194,31 +194,31 @@ describe('Orgs', () => {
   });
 });
 
-describe('ProviderAccounts', () => {
+describe('Accounts', () => {
   const api = makeApi(db);
 
-  it('getProviderAccounts() returns all accounts when no filter', () => {
-    expect(api.getProviderAccounts()).toHaveLength(3);
+  it('getAccounts() returns all accounts when no filter', () => {
+    expect(api.getAccounts()).toHaveLength(3);
   });
 
-  it('getProviderAccounts({ orgId }) filters by org', () => {
-    const accounts = api.getProviderAccounts({ orgId: 'o-alpha' });
+  it('getAccounts({ orgId }) filters by org', () => {
+    const accounts = api.getAccounts({ orgId: 'o-alpha' });
     expect(accounts).toHaveLength(2);
     expect(accounts.every((a) => a.orgId === 'o-alpha')).toBe(true);
   });
 
-  it('getProviderAccounts({ providerId }) filters by provider', () => {
-    const accounts = api.getProviderAccounts({ providerId: 'p-aws' });
+  it('getAccounts({ providerId }) filters by provider', () => {
+    const accounts = api.getAccounts({ providerId: 'p-aws' });
     expect(accounts).toHaveLength(2);
     expect(accounts.every((a) => a.providerId === 'p-aws')).toBe(true);
   });
 
-  it('getProviderAccount(id) returns correct account', () => {
-    expect(api.getProviderAccount('pa-alpha-aws')?.name).toBe('Alpha AWS');
+  it('getAccount(id) returns correct account', () => {
+    expect(api.getAccount('pa-alpha-aws')?.name).toBe('Alpha AWS');
   });
 
-  it('getProviderAccount(id) returns undefined for unknown id', () => {
-    expect(api.getProviderAccount('unknown')).toBeUndefined();
+  it('getAccount(id) returns undefined for unknown id', () => {
+    expect(api.getAccount('unknown')).toBeUndefined();
   });
 });
 
@@ -395,7 +395,7 @@ describe('Empty database', () => {
 
   it('getProviders() returns empty array', () => expect(api.getProviders()).toHaveLength(0));
   it('getOrgs() returns empty array', () => expect(api.getOrgs()).toHaveLength(0));
-  it('getProviderAccounts() returns empty array', () => expect(api.getProviderAccounts()).toHaveLength(0));
+  it('getAccounts() returns empty array', () => expect(api.getAccounts()).toHaveLength(0));
   it('getCredentials() returns empty array', () => expect(api.getCredentials()).toHaveLength(0));
   it('getExpiredCredentials() returns empty array', () => expect(api.getExpiredCredentials()).toHaveLength(0));
   it('getExpiringCredentials(30) returns empty array', () => expect(api.getExpiringCredentials(30)).toHaveLength(0));

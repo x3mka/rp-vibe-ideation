@@ -38,7 +38,7 @@ export function CredentialsPage({
   const allCredentials = api.getCredentials();
   const credentials = selectedOrgId
     ? allCredentials.filter((c) => {
-        const account = api.getProviderAccount(c.providerAccountId);
+        const account = api.getAccount(c.providerAccountId);
         return account?.orgId === selectedOrgId;
       })
     : allCredentials;
@@ -50,7 +50,7 @@ export function CredentialsPage({
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
-            <TableHead>Provider Account</TableHead>
+            <TableHead>Account</TableHead>
             <TableHead>Org</TableHead>
             <TableHead>Credential Type</TableHead>
             <TableHead>Status</TableHead>
@@ -59,7 +59,7 @@ export function CredentialsPage({
         </TableHeader>
         <TableBody>
           {credentials.map((cred) => {
-            const pa = api.getProviderAccount(cred.providerAccountId);
+            const pa = api.getAccount(cred.providerAccountId);
             const org = pa ? api.getOrg(pa.orgId) : undefined;
             const ctName =
               database.credentialTypes.find((ct) => ct.id === cred.credentialTypeId)?.name ?? '—';

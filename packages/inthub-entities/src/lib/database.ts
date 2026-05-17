@@ -1,6 +1,6 @@
 import type { Provider } from './provider.js';
 import type { Org } from './org.js';
-import type { ProviderAccount } from './provider-account.js';
+import type { Account } from './provider-account.js';
 import type { CredentialType } from './credential-type.js';
 import type { Credential } from './credential.js';
 import type { ConfigSchema } from './config-schema.js';
@@ -17,7 +17,7 @@ import type { ScheduledTask } from './scheduled-task.js';
 export interface Database {
   providers: Provider[];
   orgs: Org[];
-  providerAccounts: ProviderAccount[];
+  accounts: Account[];
   credentialTypes: CredentialType[];
   credentials: Credential[];
   configSchemas: ConfigSchema[];

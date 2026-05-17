@@ -1,7 +1,7 @@
 import type { Database } from '@rp-vibe-ideation/inthub-entities';
 import { makeProvidersApi, type ProvidersApi } from './providers.js';
 import { makeOrgsApi, type OrgsApi } from './orgs.js';
-import { makeProviderAccountsApi, type ProviderAccountsApi } from './provider-accounts.js';
+import { makeAccountsApi, type AccountsApi } from './provider-accounts.js';
 import { makeCredentialsApi, type CredentialsApi } from './credentials.js';
 import { makeConfigsApi, type ConfigsApi } from './configs.js';
 import { makeIntegrationTypesApi, type IntegrationTypesApi } from './integration-types.js';
@@ -12,7 +12,7 @@ import { makeProvisioningsApi, type ProvisioningsApi } from './provisionings.js'
 
 export type IntHubApi = ProvidersApi &
   OrgsApi &
-  ProviderAccountsApi &
+  AccountsApi &
   CredentialsApi &
   ConfigsApi &
   IntegrationTypesApi &
@@ -25,7 +25,7 @@ export function makeApi(db: Database): IntHubApi {
   return {
     ...makeProvidersApi(db),
     ...makeOrgsApi(db),
-    ...makeProviderAccountsApi(db),
+    ...makeAccountsApi(db),
     ...makeCredentialsApi(db),
     ...makeConfigsApi(db),
     ...makeIntegrationTypesApi(db),

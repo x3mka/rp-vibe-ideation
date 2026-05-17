@@ -1,21 +1,21 @@
-export enum ProviderAccountStatus {
+export enum AccountStatus {
   Active = 'Active',
   Inactive = 'Inactive',
   Suspended = 'Suspended',
 }
 
-export enum ProviderAccountOwner {
+export enum AccountOwner {
   Customer = 'Customer',
   SHQ = 'SHQ',
 }
 
-export interface ProviderAccount {
+export interface Account {
   id: string;
   orgId: string;
   providerId: string;
   name: string;
   externalId: string;
-  status: ProviderAccountStatus;
-  owner: ProviderAccountOwner;
+  status: AccountStatus;
+  owner: AccountOwner;
   config?: Record<string, unknown>;
 }
