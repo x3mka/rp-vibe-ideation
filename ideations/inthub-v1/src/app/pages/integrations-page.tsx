@@ -57,8 +57,8 @@ export function IntegrationsPage({
         <TableHeader>
           <TableRow>
             <TableHead>Org</TableHead>
+            <TableHead>Account</TableHead>
             <TableHead>Integration Type</TableHead>
-            <TableHead>Accounts</TableHead>
             <TableHead>Schedule</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Last Run</TableHead>
@@ -80,14 +80,6 @@ export function IntegrationsPage({
             return (
               <TableRow key={intg.id}>
                 <TableCell>{org?.name ?? '—'}</TableCell>
-                <TableCell>
-                  <span className="font-medium">{intType?.name ?? '—'}</span>
-                  {intType && (
-                    <div className="text-xs text-muted-foreground mt-0.5">
-                      {intType.kind} · {runtime}
-                    </div>
-                  )}
-                </TableCell>
                 <TableCell className="text-sm">
                   {sourceAccount && (
                     <div>{sourceAccount.name}</div>
@@ -95,6 +87,14 @@ export function IntegrationsPage({
                   <div className={sourceAccount ? 'text-muted-foreground' : undefined}>
                     {sourceAccount ? '→ ' : ''}{targetAccount?.name ?? '—'}
                   </div>
+                </TableCell>
+                <TableCell>
+                  <span className="font-medium">{intType?.name ?? '—'}</span>
+                  {intType && (
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      {intType.kind} · {runtime}
+                    </div>
+                  )}
                 </TableCell>
                 <TableCell className={`font-mono text-xs${scheduleIsDefault ? ' text-muted-foreground' : ''}`}>
                   {schedule ? (
