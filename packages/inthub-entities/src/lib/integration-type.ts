@@ -21,4 +21,5 @@ export interface IntegrationType {
   status: IntegrationTypeStatus;
   description?: string;
   defaultSchedule?: string;
+  configSchema?: Record<string, unknown>;
 }

@@ -86,9 +86,7 @@ const db: Database = {
       id: 'int-alpha-1',
       orgId: 'o-alpha',
       integrationTypeId: 'it-q-aws',
-      sourceAccountId: 'pa-alpha-qualys',
-      targetAccountId: 'pa-alpha-aws',
-      name: 'Alpha Q→AWS',
+      accountId: 'pa-alpha-qualys',
       status: IntegrationStatus.Active,
       createdAt: '2023-06-01T00:00:00Z',
     },
@@ -96,9 +94,7 @@ const db: Database = {
       id: 'int-beta-1',
       orgId: 'o-beta',
       integrationTypeId: 'it-q-aws',
-      sourceAccountId: 'pa-beta-aws',
-      targetAccountId: 'pa-alpha-aws',
-      name: 'Beta integration',
+      accountId: 'pa-beta-aws',
       status: IntegrationStatus.Paused,
       createdAt: '2024-02-01T00:00:00Z',
     },
@@ -312,7 +308,7 @@ describe('Integrations', () => {
   });
 
   it('getIntegration(id) returns correct integration', () => {
-    expect(api.getIntegration('int-alpha-1')?.name).toBe('Alpha Q→AWS');
+    expect(api.getIntegration('int-alpha-1')?.id).toBe('int-alpha-1');
   });
 
   it('getIntegration(id) returns undefined for unknown id', () => {
@@ -323,10 +319,8 @@ describe('Integrations', () => {
     const graph = api.getIntegrationGraph('o-alpha');
     expect(graph.edges).toHaveLength(1);
     expect(graph.edges[0].id).toBe('int-alpha-1');
-    // nodes should include source and target accounts
     const nodeIds = graph.nodes.map((n) => n.id);
     expect(nodeIds).toContain('pa-alpha-qualys');
-    expect(nodeIds).toContain('pa-alpha-aws');
   });
 
   it('getIntegrationGraph(orgId) returns empty graph for org with no integrations', () => {

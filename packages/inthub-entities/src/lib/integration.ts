@@ -9,13 +9,12 @@ export interface Integration {
   id: string;
   orgId: string;
   integrationTypeId: string;
-  sourceAccountId?: string;
-  targetAccountId: string;
-  sourceCredentialId?: string;
-  targetCredentialId?: string;
+  accountId?: string;
+  credentialId?: string;
   name?: string;
   status: IntegrationStatus;
   schedule?: string;
+  config?: Record<string, unknown>;
   createdAt: string;
   lastRunAt?: string;
 }

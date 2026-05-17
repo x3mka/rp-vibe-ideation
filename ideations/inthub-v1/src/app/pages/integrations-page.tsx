@@ -71,22 +71,16 @@ export function IntegrationsPage({
             const runtime = intType
               ? database.integrationRuntimes.find((r) => r.id === intType.runtimeId)?.name ?? '—'
               : '—';
-            const sourceAccount = intg.sourceAccountId
-              ? api.getProviderAccount(intg.sourceAccountId)
+            const account = intg.accountId
+              ? api.getProviderAccount(intg.accountId)
               : null;
-            const targetAccount = api.getProviderAccount(intg.targetAccountId);
             const schedule = intg.schedule ?? intType?.defaultSchedule;
             const scheduleIsDefault = !intg.schedule && !!intType?.defaultSchedule;
             return (
               <TableRow key={intg.id}>
                 <TableCell>{org?.name ?? '—'}</TableCell>
                 <TableCell className="text-sm">
-                  {sourceAccount && (
-                    <div>{sourceAccount.name}</div>
-                  )}
-                  <div className={sourceAccount ? 'text-muted-foreground' : undefined}>
-                    {sourceAccount ? '→ ' : ''}{targetAccount?.name ?? '—'}
-                  </div>
+                  {account?.name ?? '—'}
                 </TableCell>
                 <TableCell>
                   <span className="font-medium">{intType?.name ?? '—'}</span>

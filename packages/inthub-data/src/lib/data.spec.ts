@@ -88,13 +88,9 @@ describe('Foreign key integrity', () => {
     allExist(db.integrations.map((i) => i.integrationTypeId), integrationTypeIds, 'Integration.integrationTypeId');
   });
 
-  it('Integration.sourceAccountId → providerAccounts', () => {
-    const ids = db.integrations.map((i) => i.sourceAccountId).filter((id): id is string => id !== undefined);
-    allExist(ids, providerAccountIds, 'Integration.sourceAccountId');
-  });
-
-  it('Integration.targetAccountId → providerAccounts', () => {
-    allExist(db.integrations.map((i) => i.targetAccountId), providerAccountIds, 'Integration.targetAccountId');
+  it('Integration.accountId → providerAccounts', () => {
+    const ids = db.integrations.map((i) => i.accountId).filter((id): id is string => id !== undefined);
+    allExist(ids, providerAccountIds, 'Integration.accountId');
   });
 
   it('HealthCheckBinding.healthCheckId → healthChecks', () => {
