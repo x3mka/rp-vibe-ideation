@@ -79,7 +79,7 @@ const db: Database = {
     { id: 'rt-astro', name: 'Astronomer', type: RuntimeType.Astronomer, status: RuntimeStatus.Active },
   ],
   integrationTypes: [
-    { id: 'it-q-aws', name: 'Qualys → AWS', sourceProviderId: 'p-qualys', targetProviderId: 'p-aws', runtimeId: 'rt-astro', version: '1.0', status: IntegrationTypeStatus.Active },
+    { id: 'it-q-aws', name: 'Qualys → AWS', providerId: 'p-qualys', runtimeId: 'rt-astro', version: '1.0', status: IntegrationTypeStatus.Active },
   ],
   integrations: [
     {

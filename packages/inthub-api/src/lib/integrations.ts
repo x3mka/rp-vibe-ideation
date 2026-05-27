@@ -3,6 +3,7 @@ import type { Database, Integration, Account } from '@rp-vibe-ideation/inthub-en
 export interface IntegrationFilter {
   orgId?: string;
   integrationTypeId?: string;
+  accountId?: string;
 }
 
 export interface IntegrationGraph {
@@ -27,6 +28,9 @@ export function makeIntegrationsApi(db: Database): IntegrationsApi {
         integrations = integrations.filter(
           (i) => i.integrationTypeId === filter.integrationTypeId,
         );
+      }
+      if (filter?.accountId !== undefined) {
+        integrations = integrations.filter((i) => i.accountId === filter.accountId);
       }
       return integrations;
     },

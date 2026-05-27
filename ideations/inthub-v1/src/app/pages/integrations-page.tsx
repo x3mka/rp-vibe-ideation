@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+import { useState } from 'react';
 import { makeApi } from '@rp-vibe-ideation/inthub-api';
 import { database } from '@rp-vibe-ideation/inthub-data';
 import { Badge } from '@/components/ui/badge';
@@ -11,6 +12,15 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import type { IntegrationStatus } from '@rp-vibe-ideation/inthub-entities';
 
 const api = makeApi(database);
@@ -43,16 +53,50 @@ function describeCron(cron: string): string {
   return '';
 }
 
+const providersByCategory = api.getProvidersByCategory();
+const integrationTypeGroups = Object.entries(providersByCategory)
+  .map(([category, providers]) => {
+    const providerIds = new Set(providers.map((p) => p.id));
+    const types = api.getIntegrationTypes().filter(
+      (it) => it.providerId && providerIds.has(it.providerId),
+    );
+    return { category, types };
+  })
+  .filter((g) => g.types.length > 0);
+
 export function IntegrationsPage({
   selectedOrgId,
 }: {
   selectedOrgId: string | null;
 }): ReactElement {
-  const integrations = api.getIntegrations(selectedOrgId ? { orgId: selectedOrgId } : {});
+  const [selectedTypeId, setSelectedTypeId] = useState<string>('all');
+
+  const integrations = api.getIntegrations({
+    ...(selectedOrgId ? { orgId: selectedOrgId } : {}),
+    ...(selectedTypeId !== 'all' ? { integrationTypeId: selectedTypeId } : {}),
+  });
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-4">Integrations</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-semibold">Integrations</h2>
+        <Select value={selectedTypeId} onValueChange={setSelectedTypeId}>
+          <SelectTrigger className="w-64">
+            <SelectValue placeholder="All integration types" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All integration types</SelectItem>
+            {integrationTypeGroups.map(({ category, types }) => (
+              <SelectGroup key={category}>
+                <SelectLabel>{category}</SelectLabel>
+                {types.map((it) => (
+                  <SelectItem key={it.id} value={it.id}>{it.name}</SelectItem>
+                ))}
+              </SelectGroup>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
       <Table>
         <TableHeader>
           <TableRow>

@@ -7,19 +7,19 @@ export enum IntegrationTypeStatus {
 export enum IntegrationTypeKind {
   DataPipeline = 'DataPipeline',
   Provisioning = 'Provisioning',
+  Assessment = 'Assessment',
 }
 
 export interface IntegrationType {
   id: string;
   name: string;
   kind: IntegrationTypeKind;
-  sourceProviderId?: string;
-  targetProviderId: string;
+  providerId?: string;
   runtimeId: string;
   version: string;
-  dagId?: string;
   status: IntegrationTypeStatus;
   description?: string;
   defaultSchedule?: string;
+  config?: Record<string, unknown>;
   configSchema?: Record<string, unknown>;
 }

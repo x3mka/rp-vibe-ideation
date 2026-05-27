@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+import { useState } from 'react';
 import { makeApi } from '@rp-vibe-ideation/inthub-api';
 import { database } from '@rp-vibe-ideation/inthub-data';
 import { Badge } from '@/components/ui/badge';
@@ -11,6 +12,15 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import type { AccountStatus, AccountOwner } from '@rp-vibe-ideation/inthub-entities';
 
 const api = makeApi(database);
@@ -32,16 +42,44 @@ function accountStatusVariant(status: AccountStatus): BadgeProps['variant'] {
   }
 }
 
+const providersByCategory = api.getProvidersByCategory();
+const providerGroups = Object.entries(providersByCategory).filter(
+  ([, providers]) => providers.length > 0,
+);
+
 export function AccountsPage({
   selectedOrgId,
 }: {
   selectedOrgId: string | null;
 }): ReactElement {
-  const accounts = api.getAccounts(selectedOrgId ? { orgId: selectedOrgId } : {});
+  const [selectedProviderId, setSelectedProviderId] = useState<string>('all');
+
+  const accounts = api.getAccounts({
+    ...(selectedOrgId ? { orgId: selectedOrgId } : {}),
+    ...(selectedProviderId !== 'all' ? { providerId: selectedProviderId } : {}),
+  });
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-4">Accounts</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-semibold">Accounts</h2>
+        <Select value={selectedProviderId} onValueChange={setSelectedProviderId}>
+          <SelectTrigger className="w-52">
+            <SelectValue placeholder="All providers" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All providers</SelectItem>
+            {providerGroups.map(([category, providers]) => (
+              <SelectGroup key={category}>
+                <SelectLabel>{category}</SelectLabel>
+                {providers.map((p) => (
+                  <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>
+                ))}
+              </SelectGroup>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
       <Table>
         <TableHeader>
           <TableRow>
@@ -52,6 +90,7 @@ export function AccountsPage({
             <TableHead>External ID</TableHead>
             <TableHead>Config</TableHead>
             <TableHead>Status</TableHead>
+            <TableHead>Integrations</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -70,6 +109,7 @@ export function AccountsPage({
               <TableCell>
                 <Badge variant={accountStatusVariant(acc.status)}>{acc.status}</Badge>
               </TableCell>
+              <TableCell>{api.getIntegrations({ accountId: acc.id }).length}</TableCell>
             </TableRow>
           ))}
         </TableBody>

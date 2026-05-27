@@ -14,10 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-background text-foreground">
+      <body className="h-screen overflow-hidden bg-background text-foreground">
         <TooltipProvider>
           <ShellHeader />
-          <main>{children}</main>
+          <main className="h-[calc(100vh-3.5rem)] overflow-auto">{children}</main>
         </TooltipProvider>
       </body>
     </html>

@@ -30,7 +30,11 @@ function statusVariant(status: IntegrationTypeStatus): BadgeProps['variant'] {
 }
 
 function kindVariant(kind: IntegrationTypeKind): BadgeProps['variant'] {
-  return kind === 'Provisioning' ? 'default' : 'outline';
+  switch (kind) {
+    case 'Provisioning': return 'default';
+    case 'Assessment': return 'secondary';
+    default: return 'outline';
+  }
 }
 
 function describeCron(cron: string): string {
